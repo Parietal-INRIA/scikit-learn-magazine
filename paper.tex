@@ -1,0 +1,131 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{authblk}
+\usepackage{dblfloatfix}
+%\usepackage{hyperref}
+\usepackage{minted}
+\usepackage[numbers,square]{natbib}
+\usepackage{xcolor}
+\usepackage{xspace}
+\usepackage{url}
+
+\definecolor{rulecolor}{rgb}{0.80,0.80,0.80}
+\newminted{python}{frame=single,rulecolor=\color{rulecolor}}
+
+
+\title{scikit-learn is the greatest}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+% Lars: the following text presumes that NumPy, estimators, and the
+% X/y convention for supervised learning have already been introduced.
+\section{Text and language processing}
+
+Scikit-learn was designed around NumPy principles and data structures,
+so virtually all estimators take arrays of numbers as input
+and produce arrays as output.
+That doesn't mean that it is limited to traditional number crunching domains,
+though.
+The library has been successfully employed in text classification
+and natural language processing problems,
+and utility code is provided to translate the unstructured, symbolic data
+encountered in these domains
+to the rigid matrix/vector structure that estimators expect.
+
+In the NLP application domain,
+features are typically 
+where features are typically frequencies or boolean indicators
+of very large numbers of rare events, such as
+``document contains the term \textsf{v1agr@}'' (spam filtering)
+or ``next token matches the Roman numeral regex'' (named-entity recognition).
+To ensure scalability in the face of such data,
+SciPy's sparse matrix data structures are supported by many estimators.\footnote{
+  Support for these is added on a by-need basis,
+  because using sparse data structures puts constraints on algorithm design
+  and implementation.
+}
+
+The following example script is a fully functioning
+sentiment polarity classifier for movie reviews:
+given a review, it outputs the probability that the review is positive
+about the movie it concerns.
+The script demonstrates the use of pipelines,
+and also shows how machine learning ties into Python's
+``batteries included'' philosophy:
+downloading, unpacking and learning from a dataset
+are all done in one programming language.
+
+% XXX make_pipeline is not in 0.14.1, we should release 0.15 sometime
+% The example can be made a bit shorter by skipping the movie_reviews dir;
+% the tarball from Pang et al. contain top-level cruft.
+\begin{pythoncode}
+import os.path
+import tarfile
+from urllib import urlretrieve
+from sklearn.datasets import load\_files
+from sklearn.feature\_extraction.text import TfidfVectorizer
+from sklearn.linear\_models import LogisticRegression
+from sklearn.pipeline import make\_pipeline
+
+temp, \_ = urlretrieve('http://www.cs.cornell.edu/people/pabo/movie-review-data/review\_polarity.tar.gz')
+with tarfile.open(temp) as tar:
+    tar.extractall(path='movie\_reviews')
+data = load\_files(os.path.join('movie\_reviews', 'txt\_sentoken'))
+
+clf = make\_pipeline(TfidfVectorizer(min\_df=2, dtype=float,
+                                    sublinear\_tf=True, ngram\_range=(1, 2),
+                                    strip\_accents='unicode'),
+                     LogisticRegression(random\_state=623, C=5000))
+clf.fit(data.data, data.target)
+\end{pythoncode}
+
+This script first fetches the hand-labeled movie review dataset from
+\citet{pang2004} and unpacks it to disk using standard Python libraries.
+It then loads these into memory using the scikit-learn function
+\texttt{load\_files}, makes a pipeline of a \textsf{tf--idf} feature extractor
+\citep{rennie2003tackling} and logistic regression,
+and finally trains the model.
+The parameters for the feature extractor and the LogReg classifier
+were tuned offline; the random-number generator seed is set by hand
+to get reproducible results.
+
+Does this classifier work?
+We can find out by classifying some of our own movie reviews.\footnote{
+  The code can be tried interactively by simply copy-pasting it
+  into an interactive Python interpreter or IPython \citep{perez2007ipython}.
+}
+
+\begin{pythoncode}
+>>> clf.predict\_proba(["This movie is the worst I ever saw.",
+...                    "Shawshank Redemption, eat your heart out!"])
+array([[  9.99293000e-01,   7.07000280e-04],
+       [  1.68757754e-01,   8.31242246e-01]])
+\end{pythoncode}
+
+Here, we asked the model to predict the probability of a review being positive
+for a batch of two reviews. It returns the negative probability in the first
+column, the positive probability in the second.
+As we can see, the first review gets a 99.9\% probability for being negative,
+while the second has an 83\% probability of being positive.
+
+Of course, that's just anecdotal evidence. We can get a figure for the
+classifier's accuracy by retraining it in a five-fold cross-validation scheme:
+
+\begin{pythoncode}
+>>> from sklearn.cross\_validation import cross\_val\_score
+>>> score = cross\_val\_score(clf, data.data, data.target, cv=5)
+>>> score
+array([ 0.91  ,  0.8825,  0.88  ,  0.8775,  0.86  ])
+>>> score.mean()
+0.88200000000000001
+\end{pythoncode}
+
+
+\end{document}

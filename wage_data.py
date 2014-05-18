@@ -52,8 +52,6 @@ for name, learner in [('', None),
                 data['EDUCATION'] -.25 + .5 * np.random.random(n_sample),
                 c=data['WAGE'], cmap=plt.cm.Blues, vmax=wage_max)
 
-    plt.xlabel('Years of work experience')
-    plt.ylabel('Years of education')
     plt.yticks(size=10)
     plt.xticks(size=10)
 
@@ -86,7 +84,7 @@ for name, learner in [('', None),
     plt.ylabel('Wage')
     plt.yticks((10, 20, 30, 40), size=10)
     plt.xticks(size=10)
-    plt.xlabel('Years of experience')
+    plt.xlabel('Years of work experience')
     plt.xlim(ex_min, ex_max)
     plt.ylim(ymax=48)
 

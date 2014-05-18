@@ -3,8 +3,8 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{authblk}
-\usepackage{dblfloatfix}
-%\usepackage{hyperref}
+%\usepackage{dblfloatfix}
+\usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{minted}
 \usepackage[numbers,square]{natbib}
@@ -90,36 +90,61 @@ Parietal team from INRIA adopted the project, hiring a full time
 engineer. Basics API were defined and an efficient binding of LibSVM
 \cite{chang2011libsvm} gave the project a compelling advantage. In
 December 2011, the first international sprint was organized with generous
-funding from Google. At this point, the project has grown vastly beyond
+funding from Google. Today, the project has grown vastly beyond
 INRIA into a worldwide open source effort.
 
 \section{A brief introduction to machine learning}
 
-Discuss what we can learn from the wages examples. Introduce concepts of
-overfitting, model complexity
-
-\begin{figure}
+\begin{figure}[b]
     %\hspace*{-.015\linewidth}%
     \includegraphics[width=1.05\linewidth]{wage_data}%
 
-    \caption{Wage as a function of years of experience and education,
-    data from \cite{berndt1991}}
+    \caption{Wage as a function of years of work experience and
+    education; data from \cite{berndt1991}\label{fig:data}.}
 \end{figure}
 
-\begin{figure}
+% Introduce and describe the data
+Machine learning is about extracting rules from data, most often with the
+goal of making decision on new data. As a simple example, we show on
+Fig.\,\ref{fig:data} data about wages in the US, from \cite{berndt1991}:
+11 features, including wage, number of years of education and of work
+experience, on 534 individuals --samples in machine-learning
+jargon. This data
+Code downloading the data to reproduce the figures can be found on
+\url{https://github.com/scikit-learn/SigMobile-paper}.
+%
+This data showcases many of the typical difficulties machine learning.
+The samples are very irregularly distributed, as most individuals
+finished their education after high-school. As a result, they are gapping
+holes in the 2D plot education versus work experience, in which any
+statistical analysis is extrapolation. The data is very noisy: for a
+given education and work experience wages vary widely. This variability
+can probably be explained with missing factors, such as sector of
+activity, but adding them to the analysis creates a more complex picture,
+in 3D or more, rather than 2D, with even more gaps.
+
+% Show an example of learning, first with random forest, and introduce
+% overfit, then with svms, and discuss model complexity and use linear
+% models to link to convention statistics. Conclude with the difference
+% with 1D and 2D, and introduce the curse of dimensionality.
+Discuss what we can learn from the wages examples. Introduce concepts of
+overfitting, model complexity
+
+
+\begin{figure}[b]
     %\hspace*{-.015\linewidth}%
     \includegraphics[width=1.05\linewidth]{wage_data_random_forest}%
 
-    \caption{Wage prediction from years of experience and education,
-    using random forests}
+    \caption{Wage prediction from years of work experience and education,
+    using random forests.}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[b]
     \hspace*{-.015\linewidth}%
     \includegraphics[width=1.05\linewidth]{wage_data_linear_svm}%
 
-    \caption{Wage prediction from years of experience and education,
-    using a linear SVM}
+    \caption{Wage prediction from years of work experience and education,
+    using a linear SVM.}
 \end{figure}
 
 \section{Learning with scikit-learn}

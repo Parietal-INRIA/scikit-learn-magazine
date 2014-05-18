@@ -42,9 +42,9 @@ for name, learner in [('', None),
                       (' random forest', ensemble.RandomForestRegressor())]:
     #-----------------------------------------------------------------------
     # Plot a simple pair-wise plot
-    plt.figure(figsize=(6, 5))
+    plt.figure(figsize=(6, 4.5))
 
-    ax_2d = plt.axes([.35, .33, .6, .6])
+    ax_2d = plt.axes([.35, .352, .6, .63])
 
     # Add random offset to limit overlap in points
     n_sample = len(data)
@@ -63,14 +63,15 @@ for name, learner in [('', None),
     cb = plt.colorbar()
     # Squeeze the colorbar a bit left
     bb = cb.ax.get_position()
-    bb.x0 -= .03
+    bb.x0 -= .025
+    bb.x1 -= .01
     cb.ax.set_position(bb)
     cb.ax.set_ylabel('Wage')
     for l in cb.ax.get_yticklabels():
         l.update(dict(size=10))
 
     # Side plot as a function of education
-    ax_ed = plt.axes([.11, .33, .2, .6])
+    ax_ed = plt.axes([.11, .352, .2, .63])
     plt.plot(data['WAGE'], data['EDUCATION'], '+', label='Observed\n data')
     plt.ylim(ed_min, ed_max)
     plt.xlim(xmax=48)
@@ -80,7 +81,7 @@ for name, learner in [('', None),
     plt.yticks(size=10)
 
     # Side plot as a function of experience
-    ax_ex = plt.axes([.35, .09, .48, .2])
+    ax_ex = plt.axes([.35, .09, .48, .22])
     plt.plot(data['EXPERIENCE'], data['WAGE'], '+', label='Observed\n data')
     plt.ylabel('Wage')
     plt.yticks((10, 20, 30, 40), size=10)
@@ -88,9 +89,6 @@ for name, learner in [('', None),
     plt.xlabel('Years of experience')
     plt.xlim(ex_min, ex_max)
     plt.ylim(ymax=48)
-
-    plt.suptitle('Wage in function of years of education and experience     .',
-                 size=14)
 
     #-----------------------------------------------------------------------
     # Some learning
@@ -130,6 +128,5 @@ for name, learner in [('', None),
 
         ax_ex.legend(loc=(-.74, -.22), prop=dict(size=12), frameon=False,
                      handletextpad=.3, labelspacing=1)
-        plt.suptitle('Wage:%s prediction' % name, size=14)
 
     plt.savefig('wage_data%s.pdf' % name.lower().replace(' ', '_'))

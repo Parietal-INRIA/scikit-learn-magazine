@@ -105,7 +105,7 @@ INRIA into a worldwide open source effort.
 
 % Introduce and describe the data
 Machine learning is about extracting rules from data, most often with the
-goal of making decision on new data. As a simple example, we show on
+goal of making decision on new data \cite{elemstatlearn}. As a simple example, we show on
 Fig.\,\ref{fig:data} data about wages in the US, from \cite{berndt1991}:
 11 features, including wage, number of years of education and of work
 experience, on 534 individuals --samples in machine-learning
@@ -126,15 +126,15 @@ in 3D or more, rather than 2D, with even more gaps.
 On Fig.\,\ref{fig:random_forest}, we use a popular machine-learning
 algorithm, Random Forests, to try to predict the wage from the years of
 education, or the years of work experience, either as separate features,
-or combined.
-
-% Show an example of learning, first with random forest, and introduce
-% overfit, then with svms, and discuss model complexity and use linear
-% models to link to convention statistics. Conclude with the difference
-% with 1D and 2D, and introduce the curse of dimensionality.
-Discuss what we can learn from the wages examples. Introduce concepts of
-overfitting, model complexity
-
+or combined. The patchy square appearance of the prediction is due to the
+inners of the algorithm, and it illustrates the corresponding
+extrapolation mechanism. The predictions fit the data very; maybe too
+well, as, on the prediction solely from the years of education (left of
+the figure), it is hard to believe in the bump at 5 years. This bump is
+probably a classic case of \emph{overfit}: the algorithm is learning its
+prediction from noise in the data. As a result, the prediction error on
+new data will be significantly different than that measured on the
+training data.
 
 \begin{figure}[b]
     %\hspace*{-.015\linewidth}%
@@ -144,12 +144,30 @@ overfitting, model complexity
     using random forests.\label{fig:random_forest}}
 \end{figure}
 
+% then with svms, and discuss model complexity and use linear
+% models to link to convention statistics. Conclude with the difference
+% with 1D and 2D, and introduce the curse of dimensionality.
+%overfitting, model complexity
+
+On Fig.\,\ref{fig:linear_svm}, we use another popular machine-learning
+algorithm, linear Support Vector Machines (SVMs). Unlike random forests,
+it can only learn decisions made with linear functions. It is said that
+it has a lower \emph{model complexity}, because the number of parameters
+to learn from the data is much smaller. The risk here is to
+\emph{underfit}: not fully use the richness of the data, that may not be
+following a linear law. The art of machine learning consists in choosing
+the right family of algorithms (or models) to describe the data well and
+find the sweet spot between under and over fit. As the number of features
+describing the data grows, the number of parameters to learn grows, and
+thus the risk of overfit increases. This core difficulty is known as the
+\emph{curse of dimensionality}.
+
 \begin{figure}[b]
     \hspace*{-.015\linewidth}%
     \includegraphics[width=1.05\linewidth]{wage_data_linear_svm}%
 
     \caption{Wage prediction from years of work experience and education,
-    using a linear SVM.}
+    using a linear SVM.\label{fig:linear_svm}}
 \end{figure}
 
 \section{Learning with scikit-learn}

@@ -45,37 +45,36 @@ machine-learning basics.
 %
 Scikit-learn was born from the observation that most standard
 machine-learning algorithms were out of reach of the users that could
-most benefit from them, such as researchers --biologists, climate
-scientists, experimental physicists--, developers in the industry --web
-services, domain-specific applications-- or any analyst without a strong
-training in statistics.
+most benefit from them: researchers --biologists, climate
+scientists, experimental physicists-- or developers --for web
+services or domain-specific applications.
 %
 Implementations mostly consisted of scattered piece of code to download
-on researchers' web pages, with the notable exception a few
-statistic-specific environment such as the R language \cite{Rmanual}, or
+on researchers' web pages, with the notable exception
+statistic-specific environments such as the R language \cite{Rmanual}, or
 the Weka java library \cite{hall2009weka}.
 
-Bridging the gap between machine learning research and applications
-
-\cite{pedregosa2011}
-
-Impact on education (documentation)
-
-Striving for ease-of-use and quality
-
-Importance of API design \cite{buitinck2013ecml}
+Scikit-learn aims to bridge the gap between machine-learning research and
+applications by providing a library, and not an environment, in a
+general-purpose language, relying on domain-agnostic data structures
+\cite{pedregosa2011}. Emphasis is put on quality and ease of use, which
+implies focus on installation issues, documentation, and API design
+\cite{buitinck2013ecml}. For the project to be usable in real-world
+settings, computational performance is also a priority.
 
 \paragraph{The Python data ecosystem}
 %
-In a data analysis pipeline, machine learning is only a tiny bit of the
-pipeline, although it is critical.
-
-Great scientific and numeric ecosystem
-\cite{oliphant2007python,varoquaux2013scipy}, but also text processing,
-webservers
-
-NumPy arrays \cite{vanderwalt2011}, SciPy, matplotlib. Cython
-\cite{behnel2011cython}
+Machine learning is only a small part of a data-analysis pipeline, and
+scikit-learn nicely dovetails into the rich Python ecosystem: scientific
+and numeric tools \cite{oliphant2007python,varoquaux2013scipy}, but also
+text processing tools, web servers...
+%
+For its numerical needs, scikit-learn leverages NumPy arrays
+\cite{vanderwalt2011} --data structures for efficient numerical
+computation--, SciPy --a collection of classic numerical algorithms--,
+matplotlib \cite{hunter2007matplotlib} --for scientific plotting-- and
+Cython, to generate and call compiled code in a Python-like syntax
+\cite{behnel2011cython}.
 
 Pandas for columnar data, scikit-image, NLTK.
 
@@ -271,6 +270,8 @@ We have found that implementing, even a standard algorithm, really well,
 can require a lot of domain knowledge. Thus it is natural that specific
 libraries span up to solve it. Some adopt scikit-learn API and standard,
 and we hope that scikit-learn has a structural effect on the environment.
+
+Impact on education (documentation)
 
 \small
 \bibliography{paper}

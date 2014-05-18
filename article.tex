@@ -5,6 +5,7 @@
 \usepackage{authblk}
 \usepackage{dblfloatfix}
 %\usepackage{hyperref}
+\usepackage{graphicx}
 \usepackage{minted}
 \usepackage[numbers,square]{natbib}
 \usepackage{xcolor}
@@ -42,6 +43,18 @@ machine-learning basics.
 
 \paragraph{Project vision}
 %
+Scikit-learn was born from the observation that most standard
+machine-learning algorithms were out of reach of the users that could
+most benefit from them, such as researchers --biologists, climate
+scientists, experimental physicists--, developers in the industry --web
+services, domain-specific applications-- or any analyst without a strong
+training in statistics.
+%
+Implementations mostly consisted of scattered piece of code to download
+on researchers' web pages, with the notable exception a few
+statistic-specific environment such as the R language \cite{Rmanual}, or
+the Weka java library \cite{hall2009weka}.
+
 Bridging the gap between machine learning research and applications
 
 \cite{pedregosa2011}
@@ -52,7 +65,7 @@ Striving for ease-of-use and quality
 
 Importance of API design \cite{buitinck2013ecml}
 
-\paragraph{The python data ecosystem}
+\paragraph{The Python data ecosystem}
 %
 In a data analysis pipeline, machine learning is only a tiny bit of the
 pipeline, although it is critical.
@@ -80,6 +93,17 @@ LibSVM a good start
 
 Discuss what we can learn from the wages examples. Introduce concepts of
 overfitting, model complexity
+
+\begin{figure*}
+    \includegraphics[width=.355\linewidth]{wage_data}%
+    \hspace*{-.025\linewidth}%
+    \hfill%
+    \includegraphics[width=.355\linewidth]{wage_data_random_forest}%
+    \hspace*{-.025\linewidth}%
+    \hfill%
+    \includegraphics[width=.355\linewidth]{wage_data_linear_svm}%
+
+\end{figure*}
 
 \section{Learning with scikit-learn}
 

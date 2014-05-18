@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage{magazine-style}
+
+\begin{document}
+
+\title{Scikit-learn: machine learning without learning the machinery}
+
+\author{The authors}
+
+\maketitle
+
+\section{Introduction}
+
+\subsection{Project vision}
+
+Bridging the gap between machine learning research and applications
+
+\cite{pedregosa2011}
+
+Impact on education (documentation)
+
+Striving for ease-of-use and quality
+
+Importance of API design \cite{buitinck2013ecml}
+
+\subsection{The python data ecosystem}
+
+In a data analysis pipeline, machine learning is only a tiny bit of the
+pipeline, although it is critical.
+
+Great scientific and numeric ecosystem
+\cite{oliphant2007python,varoquaux2013scipy}, but also text processing,
+webservers
+
+Numpy arrays \cite{vanderwalt2011}, Scipy, matplotlib. Cython
+\cite{behnel2011cython}
+
+Pandas for columnar data, scikit-image, NLTK.
+
+Ipython for interactive work \cite{perez2007ipython}
+
+\subsection{Some history of the project}
+
+PhD project of David Cournapeau and Matthieu Brucher, Parietal-INRIA
+comes along,... 2010 sprint, 
+
+LibSVM a good start
+\cite{chang2011libsvm}
+
+\section{Learning with scikit-learn}
+
+\subsection{The data matrix}
+
+Blahblah
+
+\subsection{Supervised models: learning to predict}
+
+Blahblah
+
+\subsection{Model evaluation and parameter selection}
+
+Model evaluation:
+cross-validation: the concept, cross-val iterators, and cross\_val\_score
+
+Problem of multiple metrics.
+
+CV objects: GridSearchCV and RandomSearchCV, as well as FooBarCV objects.
+
+\subsection{Unsupervised models: learning to transform}
+
+Unsupervised learning: a variety of usage pattern.
+
+Many things can be seen as Transformers
+
+Introduce the pipeline
+
+\section{In practice}
+
+\subsection{A simple text-mining example}
+
+Example from Lars here
+
+\subsection{What about big data?}
+
+Partial fit, random projections, HashingVectorizer
+
+\section{Nurturing an open source project}
+
+Goal: enable anybody to contribute, have a controlled process, grow.
+
+Github, tests (link to travis)
+
+Difficulty of getting credit, of rewarding properly the long tail of small
+contributors, of finding funding. Problem of brain drain.
+
+Difficulty of project scope (ideally: first cover all of statistical
+learning classics \cite{elemstatlearn}) and default parameters
+
+We have found that implementing, even a standard algorithm, really well,
+can require a lot of domain knowledge. Thus it is natural that specific
+libraries span up to solve it. Some adopt scikit-learn API and standard,
+and we hope that scikit-learn has a structural effect on the environment.
+
+\small
+\bibliography{paper}
+\bibliographystyle{plain}
+
+
+\end{document}

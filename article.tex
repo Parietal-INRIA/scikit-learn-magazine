@@ -123,6 +123,11 @@ can probably be explained with missing factors, such as sector of
 activity, but adding them to the analysis creates a more complex picture,
 in 3D or more, rather than 2D, with even more gaps.
 
+On Fig.\,\ref{fig:random_forest}, we use a popular machine-learning
+algorithm, Random Forests, to try to predict the wage from the years of
+education, or the years of work experience, either as separate features,
+or combined.
+
 % Show an example of learning, first with random forest, and introduce
 % overfit, then with svms, and discuss model complexity and use linear
 % models to link to convention statistics. Conclude with the difference
@@ -136,7 +141,7 @@ overfitting, model complexity
     \includegraphics[width=1.05\linewidth]{wage_data_random_forest}%
 
     \caption{Wage prediction from years of work experience and education,
-    using random forests.}
+    using random forests.\label{fig:random_forest}}
 \end{figure}
 
 \begin{figure}[b]

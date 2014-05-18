@@ -172,13 +172,22 @@ thus the risk of overfit increases. This core difficulty is known as the
 
 \section{Learning with scikit-learn}
 
-\paragraph{The data matrix}
+\paragraph{Setting up models and feeding them data}
 %
-Blahblah
+Models in scikit-learn, called \emph{estimators}, are objects
+instantiated with all parameters that describe them, but with data. They
+have a {\tt fit} method, that accepts an $(n \times p)$ data
+matrix--numpy array or scipy sparse matrix--, where $n$ is the number of
+samples, and $p$ the number of features--, and possibly a quantity to
+predict, also an array, 1D unless the prediction is \emph{multi-output},
+with floats for a regression task, as in the wages prediction, or
+integers for classification, that is predicting for each sample to which
+class it belongs. The data seldom come in this form, and they must be
+adapted to be suitable for consumption by estimators.
 
 \paragraph{Supervised models: learning to predict}
 %
-Blahblah
+The goal of supervised models is prediction; they 
 
 \paragraph{Model evaluation and parameter selection}
 %

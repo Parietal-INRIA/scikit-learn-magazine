@@ -235,12 +235,15 @@ encountered in these domains
 to the rigid matrix/vector structure that estimators expect.
 
 In the NLP application domain,
-features are typically 
-where features are typically frequencies or boolean indicators
-of very large numbers of rare events, such as
-``document contains the term \textsf{v1agr@}'' (spam filtering)
-or ``next token matches the Roman numeral regex'' (named-entity recognition).
-To ensure scalability in the face of such data,
+features are typically frequencies or boolean indicators
+of very large numbers of rare events.
+In document classification tasks such spam filtering,
+these events may be booleans indicating
+``document contains the term \textsf{v1agr@}''
+(and so on for all words encountered in the training set).
+In other NLP problems such as finding proper names and their classes (NER),
+events such as ``next token matches the Roman numeral regex'' may be used.
+To ensure scalability in the face of such extremely high-dimensional data,
 SciPy's sparse matrix data structures are supported by many estimators.\footnote{
   Support for these is added on a by-need basis,
   because using sparse data structures puts constraints on algorithm design
@@ -287,12 +290,14 @@ It then loads these into memory using the scikit-learn function
 \texttt{load\_files}, makes a pipeline of a \textsf{tf--idf} feature extractor
 \cite{rennie2003tackling} and logistic regression,
 and finally trains the model.
+The feature extractor (vectorizer) takes text as strings
+and produces a sparse matrix of weights based on frequencies.
 The parameters for the feature extractor and the LogReg classifier
 were tuned offline; the random-number generator seed is set by hand
 to get reproducible results.
 
 Does this classifier work?
-We can find out by classifying some of our own movie reviews.\footnote{
+We can find out by classifying two of our own movie reviews.\footnote{
   The code can be tried interactively by simply copy-pasting it
   into an interactive Python interpreter or IPython \cite{perez2007ipython}.
 }

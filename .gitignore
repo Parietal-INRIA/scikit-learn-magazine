@@ -91,3 +91,6 @@ sympy-plots-for-*.tex/
 
 # Editor temporaries
 *.swp
+
+# downloads from sentiment classification example
+txt_sentoken/

@@ -272,7 +272,7 @@ from sklearn.feature\_extraction.text import TfidfVectorizer
 from sklearn.linear\_models import LogisticRegression
 from sklearn.pipeline import make\_pipeline
 
-temp, \_ = urlretrieve('http://www.cs.cornell.edu/people/pabo/movie-review-data/review\_polarity.tar.gz')
+temp, \_ = urlretrieve('http://preview.tinyurl.com/review-tgz')
 with tarfile.open(temp) as tar:
     tar.extractall(path='movie\_reviews')
 data = load\_files(os.path.join('movie\_reviews', 'txt\_sentoken'))

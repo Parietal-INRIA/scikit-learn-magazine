@@ -189,14 +189,22 @@ consumption by estimators.
 \paragraph{Supervised models: learning to predict}
 %
 The goal of supervised models is prediction. The corresponding estimators
-have a 
+have a {\tt predict} method, that takes a data matrix $\mathbf{X}$ and
+returns a predicted $\mathbf{y}$.
 
 \paragraph{Model evaluation and parameter selection}
 %
-Model evaluation:
-cross-validation: the concept, cross-val iterators, and cross\_val\_score
-
-Problem of multiple metrics.
+The data used to train a model can be used to measure the prediction
+error, as it would be enable to distinguish noise from signal, and thus
+overly optimistic. The correct way is to leave out \emph{test} data,
+untouched during training. Often a \emph{cross-validation} scheme is
+used, where the data is repeatedly split into \emph{train} and
+\emph{test} subsets. Scikit-learn provides a complete framework for
+cross-validation. Specific iterators are used to describe the subsets and
+several functions and objects accept as arguments these iterators to
+perform cross-validation internally. For instance the {\tt
+cross\_val\_score} function measures the prediction score of an
+estimator.
 
 CV objects: GridSearchCV and RandomSearchCV, as well as FooBarCV objects.
 

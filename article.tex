@@ -6,15 +6,12 @@
 %\usepackage{dblfloatfix}
 \usepackage{hyperref}
 \usepackage{graphicx}
-\usepackage{minted}
+\usepackage{listings}
 \usepackage[numbers,square]{natbib}
 \usepackage{xcolor}
 \usepackage{xspace}
 \usepackage{url}
 \usepackage{magazine-style}
-
-\definecolor{rulecolor}{rgb}{0.80,0.80,0.80}
-\newminted{python}{frame=single,rulecolor=\color{rulecolor}}
 
 
 \title{Scikit-learn: machine learning without learning the machinery}
@@ -23,6 +20,7 @@
 
 
 \begin{document}
+\lstset{language=Python}
 
 \maketitle
 
@@ -263,26 +261,26 @@ are all done in one programming language.
 % XXX make_pipeline is not in 0.14.1, we should release 0.15 sometime
 % The example can be made a bit shorter by skipping the movie_reviews dir;
 % the tarball from Pang et al. contain top-level cruft.
-\begin{pythoncode}
+\begin{lstlisting}
 import os.path
 import tarfile
 from urllib import urlretrieve
-from sklearn.datasets import load\_files
-from sklearn.feature\_extraction.text import TfidfVectorizer
-from sklearn.linear\_models import LogisticRegression
-from sklearn.pipeline import make\_pipeline
+from sklearn.datasets import load_files
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_models import LogisticRegression
+from sklearn.pipeline import make_pipeline
 
-temp, \_ = urlretrieve('http://preview.tinyurl.com/review-tgz')
+temp, _ = urlretrieve('http://preview.tinyurl.com/review-tgz')
 with tarfile.open(temp) as tar:
-    tar.extractall(path='movie\_reviews')
-data = load\_files(os.path.join('movie\_reviews', 'txt\_sentoken'))
+    tar.extractall(path='movie_reviews')
+data = load_files(os.path.join('movie_reviews', 'txt_sentoken'))
 
-clf = make\_pipeline(TfidfVectorizer(min\_df=2, dtype=float,
-                                    sublinear\_tf=True, ngram\_range=(1, 2),
-                                    strip\_accents='unicode'),
-                     LogisticRegression(random\_state=623, C=5000))
+clf = make_pipeline(TfidfVectorizer(min_df=2, dtype=float,
+                                    sublinear_tf=True, ngram_range=(1, 2),
+                                    strip_accents='unicode'),
+                     LogisticRegression(random_state=623, C=5000))
 clf.fit(data.data, data.target)
-\end{pythoncode}
+\end{lstlisting}
 
 This script first fetches the hand-labeled movie review dataset from
 \cite{pang2004} and unpacks it to disk using standard Python libraries.
@@ -302,12 +300,12 @@ We can find out by classifying two of our own movie reviews.\footnote{
   into an interactive Python interpreter or IPython \cite{perez2007ipython}.
 }
 
-\begin{pythoncode}
->>> clf.predict\_proba(["This movie is the worst I ever saw.",
+\begin{lstlisting}
+>>> clf.predict_proba(["This movie is the worst I ever saw.",
 ...                    "Shawshank Redemption, eat your heart out!"])
 array([[  9.99293000e-01,   7.07000280e-04],
        [  1.68757754e-01,   8.31242246e-01]])
-\end{pythoncode}
+\end{lstlisting}
 
 Here, we asked the model to predict the probability of a review being positive
 for a batch of two reviews. It returns the negative probability in the first
@@ -318,14 +316,14 @@ while the second has an 83\% probability of being positive.
 Of course, that's just anecdotal evidence. We can get a figure for the
 classifier's accuracy by retraining it in a five-fold cross-validation scheme:
 
-\begin{pythoncode}
->>> from sklearn.cross\_validation import cross\_val\_score
->>> score = cross\_val\_score(clf, data.data, data.target, cv=5)
+\begin{lstlisting}
+>>> from sklearn.cross_validation import cross_val_score
+>>> score = cross_val_score(clf, data.data, data.target, cv=5)
 >>> score
 array([ 0.91  ,  0.8825,  0.88  ,  0.8775,  0.86  ])
 >>> score.mean()
 0.88200000000000001
-\end{pythoncode}
+\end{lstlisting}
 
 \paragraph{What about big data?}
 %

@@ -276,8 +276,8 @@ events such as ``next token is the Roman numeral'' may be relevant, as in
 ``J.P. Kennedy III''. Counting bigrams, or $n$-grams, can be a way of
 capturing this information. Reusing the {\tt transform} API, scikit-learn
 provide a few \emph{feature extraction} objects, that can turn such
-unstructured data into a data matrix.
-The $\textbf{X}$ matrix is in these situations a
+unstructured data into a data matrix. In these situations, the
+$\textbf{X}$ matrix is a
 matrix of counting statistics. It is full of zeros, in the sens that very
 often a word is present only in a few documents. For better scalability,
 it can be encoded using SciPy's sparse matrices, that many scikit-learn
@@ -299,31 +299,26 @@ on word frequencies-- and logistic regression, and finally trains the
 model. The parameters for the feature extractor and the LogReg classifier
 were set manually.
 
-Does this classifier work?
-We can find out by classifying two of our own movie reviews.\footnote{
+We can test our classifier on two new movie reviews.\footnote{
   The code can be tried interactively by simply copy-pasting it
   into an interactive Python interpreter or IPython \cite{perez2007ipython}.
 }
-
 \begin{lstlisting}
 >>> clf.predict(["Worst movie I ever saw",
 ...      "Godzilla, eat your heart out!"])
 array([0, 1])
 \end{lstlisting}
 
-Here, we asked the model to predict the probability of a review being positive
-for a batch of two reviews. It returns the negative probability in the first
-column, the positive probability in the second.
-As we can see, the first review gets a 99.9\% probability for being negative,
-while the second has an 83\% probability of being positive.
-
-Of course, that's just anecdotal evidence. We can get a figure for the
-classifier's accuracy by retraining it in a five-fold cross-validation scheme:
-
+Here, we asked the estimator to predict if the reviews were positive for
+a batch of two reviews. The first review is predicted has being not
+positive, \emph{i.e.} negative, while the second one is positive. We have
+anecdotal evidence that the classifier work. To get a measure for the
+classifier's accuracy we retraining it in a cross-validation scheme, this
+yield the fraction of correct answers on three different folds:
 \begin{lstlisting}
 >>> from sklearn import cross_validation
 >>> cross_validation.cross_val_score(clf, data.data, data.target)
-array([ 0.91, 0.8825, 0.88, 0.8775, 0.86])
+array([0.9026946, 0.8723724, 0.8633634])
 \end{lstlisting}
 
 \paragraph{What about big data?}

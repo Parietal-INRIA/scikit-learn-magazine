@@ -13,6 +13,30 @@
 \usepackage{url}
 \usepackage{magazine-style}
 
+% Listing settings for Python
+\lstset{language=python,
+	extendedchars=true,
+	xleftmargin = 0pt,
+	%frame=single,
+	%rulecolor=\color{lightgrey},
+        aboveskip = 0.5ex,
+        belowskip = 0.6ex,
+	basicstyle=\small\sffamily,
+	escapebegin={\color{green}},
+        keywordstyle=\bfseries\color{blue!50!black},
+	%identifierstyle=\sffamily\small,
+	commentstyle=\color{green!40!black},
+	stringstyle=\rmfamily\color{red!60!black},
+	showstringspaces=false,
+	tabsize=2,
+	breaklines=true,
+	%classoffset=1,
+        morekeywords={{,},=,:}, %keywordstyle=\color{SkoleYellow},
+	%classoffset=0,
+	backgroundcolor=\color{green!10},
+	fillcolor=\color{green!10},
+}
+
 
 \title{Scikit-learn: machine learning without learning the machinery}
 
@@ -228,6 +252,7 @@ form a new estimator that applies transformations before calling the {\tt
 fit} or {\tt predict} method of the last object.
 
 
+
 \section{In practice}
 
 \paragraph{A simple text-mining example}
@@ -262,6 +287,10 @@ SciPy's sparse matrix data structures are supported by many estimators.\footnote
   and implementation.
 }
 
+\begin{figure*}
+\lstinputlisting[lastline=12]{nlp_example.py}
+\end{figure*}
+
 The following example script is a fully functioning
 sentiment polarity classifier for movie reviews:
 given a review, it outputs the probability that the review is positive
@@ -275,26 +304,26 @@ are all done in one programming language.
 % XXX make_pipeline is not in 0.14.1, we should release 0.15 sometime
 % The example can be made a bit shorter by skipping the movie_reviews dir;
 % the tarball from Pang et al. contain top-level cruft.
-\begin{lstlisting}
-import os.path
-import tarfile
-from urllib import urlretrieve
-from sklearn.datasets import load_files
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_models import LogisticRegression
-from sklearn.pipeline import make_pipeline
-
-temp, _ = urlretrieve('http://preview.tinyurl.com/review-tgz')
-with tarfile.open(temp) as tar:
-    tar.extractall(path='movie_reviews')
-data = load_files(os.path.join('movie_reviews', 'txt_sentoken'))
-
-clf = make_pipeline(TfidfVectorizer(min_df=2, dtype=float,
-                                    sublinear_tf=True, ngram_range=(1, 2),
-                                    strip_accents='unicode'),
-                     LogisticRegression(random_state=623, C=5000))
-clf.fit(data.data, data.target)
-\end{lstlisting}
+%\begin{lstlisting}
+%import os.path
+%import tarfile
+%from urllib import urlretrieve
+%from sklearn.datasets import load_files
+%from sklearn.feature_extraction.text import TfidfVectorizer
+%from sklearn.linear_models import LogisticRegression
+%from sklearn.pipeline import make_pipeline
+%
+%temp, _ = urlretrieve('http://preview.tinyurl.com/review-tgz')
+%with tarfile.open(temp) as tar:
+%    tar.extractall(path='movie_reviews')
+%data = load_files(os.path.join('movie_reviews', 'txt_sentoken'))
+%
+%clf = make_pipeline(TfidfVectorizer(min_df=2, dtype=float,
+%                                    sublinear_tf=True, ngram_range=(1, 2),
+%                                    strip_accents='unicode'),
+%                     LogisticRegression(random_state=623, C=5000))
+%clf.fit(data.data, data.target)
+%\end{lstlisting}
 
 This script first fetches the hand-labeled movie review dataset from
 \cite{pang2004} and unpacks it to disk using standard Python libraries.

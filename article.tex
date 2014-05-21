@@ -202,17 +202,31 @@ cross-validation. Specific iterators are used to describe the subsets and
 several functions and objects accept as arguments these iterators to
 perform cross-validation internally. For instance the {\tt
 cross\_val\_score} function measures the prediction score of an
-estimator.
-
-CV objects: GridSearchCV and RandomSearchCV, as well as FooBarCV objects.
+estimator. Cross-validation can also be used to tuned the meta-parameters
+of an estimator, such as the sparsity of a sparse model. For this,
+specific estimators, \emph{meta-estimators}, such as the {\tt
+GridSearchCV}, take another estimator at construction time, and use
+cross-validation internally to set its parameter. When used together with
+{\tt cross\_val\_score}, they perform \emph{nested} cross-validation,
+\emph{i.e.}~the meta-parameters are set independently of the test data?
 
 \paragraph{Unsupervised models: learning to transform}
 %
-Unsupervised learning: a variety of usage pattern.
+Unsupervised learning covers all learning applications in which there is
+no clearly identified variable to predict. For instance, in a clustering
+application, the task is to group together observations that are similar.
+Dimension reduction tries to find simplified representations that capture
+well the properties of the data. Novelty detection finds in a new dataset
+observations that differ from the data in the train set. As the uses of
+unsupervised learning are very diverse, it is not possible to have an API
+as uniform as for supervised learning. While some unsupervised
+estimators can be used to predict a characteristic of new data, such as
+in novelty detection, many are useful to transform data, as in dimension
+random. Scikit-learn estimators can have a {\tt transform} method, used
+for this purpose. A {\tt Pipeline} estimator can then chain estimators to
+form a new estimator that applies transformations before calling the {\tt
+fit} or {\tt predict} method of the last object.
 
-Many things can be seen as Transformers
-
-Introduce the pipeline
 
 \section{In practice}
 

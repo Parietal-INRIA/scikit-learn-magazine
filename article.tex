@@ -323,6 +323,23 @@ array([0.9026946, 0.8723724, 0.8633634])
 
 \paragraph{What about big data?}
 %
+``Big data'' is the latest trend of data analytics: applying machine
+learning to large datasets can extract information so far unexploited.
+These large datasets present of course new technical challenges, in
+particular to be computationally tractable. It is important to
+distinguish the case of very large number of samples, or very large
+number of features. For a very large number of features, on-the-fly data
+reductions, that exploit latent redundancy in the features, come in
+handy. In scikit-learn, one could for instance resort to
+random projections, that exploit the Johnson-Lindenstrauss lemma to give
+good approximations of Euclidean distance in the datasets. In the
+situation of a very large number of samples, some estimator expose
+\emph{on-line} algorithms: they can be fit incrementally, with successive
+calls to their {\tt partial\_fit} method, and converge in a small number
+of passes on the data. To alleviate one of the main practical challenges of
+big data, data-transfer latency, optimal data-fetching code can be used
+in parallel with the calls to {\tt partial\_fit}.
+
 Partial fit, random projections, HashingVectorizer
 
 \section{Nurturing an open source project}

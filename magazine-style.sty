@@ -1,0 +1,137 @@
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{paperwidth=21cm, left=1cm, width=17.5cm, bindingoffset=0.6cm,
+            textheight=24.5cm, paperheight=27.5cm, twoside}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Color
+\definecolor{deep_blue}{rgb}{0,.2,.5}
+\definecolor{dark_blue}{rgb}{0,.15,.5}
+\definecolor{myblue}{rgb}{.01,0.21,0.71}
+
+\colorlet{deep_color}{deep_blue}
+\colorlet{dark_color}{dark_blue}
+\colorlet{mycolor}{myblue}
+
+\hypersetup{pdftex,  % needed for pdflatex
+  breaklinks=true,  % so long urls are correctly broken across lines
+  colorlinks=true,
+  urlcolor=mycolor,
+  linkcolor=dark_color,
+  citecolor=deep_color,
+  }
+
+\definecolor{darkred}{rgb}{0.7, 0, 0}
+\definecolor{lightgreen}{rgb}{0.89, .99, 0.9}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure captions
+\usepackage[small,up]{caption}
+\renewcommand{\captionfont}{\small\sffamily\bfseries}
+
+\let\oldcaption\caption
+
+\renewcommand{\caption}[1]{%
+\rule{\linewidth}{0.2mm}\\[-2em]
+\oldcaption{#1}%
+}
+
+% Slack float placement
+\AtBeginDocument{
+\renewcommand{\topfraction}{0.90}    % max fraction of floats at top
+\renewcommand{\bottomfraction}{0.9}	% max fraction of floats at bottom
+\renewcommand{\dbltopfraction}{0.99} % fit big float above 2-col. text
+\renewcommand{\textfraction}{0.01}	% allow minimal text w. figs
+\setcounter{dbltopnumber}{2}
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}     % 2 may work better
+\renewcommand{\floatpagefraction}{0.8}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract
+\renewenvironment{abstract}{\sffamily}{\bigskip}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2 Columns
+\AtBeginDocument{\twocolumn}
+
+\setlength{\columnsep}{1cm}
+\sloppy
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Section titles
+\def\title#1{\def\@title{\sffamily\bfseries\huge\color{darkred}#1}}
+
+\renewcommand{\section}{\@startsection {section}{1}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {.3ex \@plus.2ex}%
+                                   {\normalfont\large\sffamily\bfseries%
+				    \color{darkred}}}
+
+\renewcommand{\subsection}{\@startsection {subsection}{2}{\z@}%
+                                   {-3.5ex \@plus -1ex \@minus -.2ex}%
+                                   {.3ex \@plus.2ex}%
+                                   {\normalfont\sffamily\bfseries%
+				    \color{darkred}}}
+
+\renewcommand{\paragraph}[1]{{\medskip\normalfont\sffamily\bfseries #1.}}
+
+\def\thesection{\hspace*{-2.5ex}\vbox{}}
+\def\thesubsection{\hspace*{-2.5ex}\vbox{}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Colored verbatim
+\let\old@verbatim\verbatim
+\let\old@endverbatim\endverbatim
+
+\setlength{\parindent}{0pt}
+
+\renewenvironment{verbatim}{%
+\hspace*{-3ex}%
+\begin{lrbox}{\@tempboxa}
+\hspace*{-.3ex}%
+\begin{minipage}{1.12\linewidth}
+\vspace*{.5ex}%
+\scriptsize%
+\old@verbatim%
+}
+{%
+\old@endverbatim%
+\vspace*{-5ex}
+\end{minipage}%
+\end{lrbox}%
+\colorbox{lightgreen}{\usebox{\@tempboxa}}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Small bibliography
+\let\my@thebibliography\thebibliography
+\def\thebibliography#1{%
+    \setlength{\bibsep}{1ex plus .5ex minus .5ex}%
+    \small%
+    \my@thebibliography{#1}%
+    \small%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tight lists
+\usepackage{enumitem}
+\setlist{itemsep=.2ex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+% with this we ensure that the chapter and section
+% headings are in lowercase
+%\renewcommand{\chaptermark}[1]{markboth{#1}{}}
+%\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{} %delete the current section for header and footer
+\fancyfoot[LE,RO]{\sffamily\bfseries\thepage}
+\fancyfoot[LO]{\bfseries\rightmark}
+\fancyfoot[RE]{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.5pt}
+

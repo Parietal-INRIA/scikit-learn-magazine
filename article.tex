@@ -344,10 +344,9 @@ We can find out by classifying two of our own movie reviews.\footnote{
 }
 
 \begin{lstlisting}
->>> clf.predict_proba(["This movie is the worst I ever saw.",
-...                    "Shawshank Redemption, eat your heart out!"])
-array([[  9.99293000e-01,   7.07000280e-04],
-       [  1.68757754e-01,   8.31242246e-01]])
+>>> clf.predict(["Worst movie I ever saw",
+...      "Godzilla, eat your heart out!"])
+array([0, 1])
 \end{lstlisting}
 
 Here, we asked the model to predict the probability of a review being positive
@@ -360,12 +359,9 @@ Of course, that's just anecdotal evidence. We can get a figure for the
 classifier's accuracy by retraining it in a five-fold cross-validation scheme:
 
 \begin{lstlisting}
->>> from sklearn.cross_validation import cross_val_score
->>> score = cross_val_score(clf, data.data, data.target, cv=5)
->>> score
-array([ 0.91  ,  0.8825,  0.88  ,  0.8775,  0.86  ])
->>> score.mean()
-0.88200000000000001
+>>> from sklearn import cross_validation
+>>> cross_validation.cross_val_score(clf, data.data, data.target)
+array([ 0.91, 0.8825, 0.88, 0.8775, 0.86])
 \end{lstlisting}
 
 \paragraph{What about big data?}

@@ -3,7 +3,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{authblk}
-%\usepackage{dblfloatfix}
+\usepackage{dblfloatfix}
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{listings}
@@ -214,6 +214,15 @@ The goal of supervised models is prediction. The corresponding estimators
 have a {\tt predict} method, that takes a data matrix $\mathbf{X}$ and
 returns a predicted $\mathbf{y}$.
 
+\begin{figure*}[b]
+% To have the float on the bottom, we need this declared on the page
+% before where it is going to be printed
+\lstinputlisting[lastline=12]{nlp_example.py}
+\caption{Simple text-processing code to download movie reviews from
+Internet and learn positive versus negative ratings.}
+\end{figure*}
+
+
 \paragraph{Model evaluation and parameter selection}
 %
 The data used to train a model can be used to measure the prediction
@@ -251,15 +260,10 @@ for this purpose. A {\tt Pipeline} estimator can then chain estimators to
 form a new estimator that applies transformations before calling the {\tt
 fit} or {\tt predict} method of the last object.
 
-
-
 \section{In practice}
 
 \paragraph{A simple text-mining example}
 %
-% Lars: the following text presumes that NumPy, estimators, and the
-% X/y convention for supervised learning have already been introduced.
-
 Scikit-learn was designed around NumPy principles and data structures,
 so virtually all estimators take arrays of numbers as input
 and produce arrays as output.
@@ -286,12 +290,6 @@ SciPy's sparse matrix data structures are supported by many estimators.\footnote
   because using sparse data structures puts constraints on algorithm design
   and implementation.
 }
-
-\begin{figure*}
-\lstinputlisting[lastline=12]{nlp_example.py}
-\caption{Simple text-processing code to download movie reviews from
-Internet and learn positive versus negative ratings.}
-\end{figure*}
 
 The following example script is a fully functioning
 sentiment polarity classifier for movie reviews:

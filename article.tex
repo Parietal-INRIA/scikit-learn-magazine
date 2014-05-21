@@ -64,7 +64,7 @@ machine-learning basics.
 
 \section{A software project across communities}
 
-\paragraph{Project vision}
+\paragraph{Project vision.}
 %
 Scikit-learn was born from the observation that most standard
 machine-learning algorithms were out of reach of the users that could
@@ -85,7 +85,7 @@ implies focus on installation issues, documentation, and API design
 \cite{buitinck2013ecml}. For the project to be usable in real-world
 settings, computational performance is also a priority.
 
-\paragraph{The Python data ecosystem}
+\paragraph{The Python data ecosystem.}
 %
 Machine learning is only a small part of a data-analysis pipeline, and
 scikit-learn nicely dovetails into the rich Python ecosystem: scientific
@@ -104,7 +104,7 @@ of data, notably Pandas for columnar data \cite{mckinney2012}, scikit-image
 for images, and NLTK for text. Finally, the IPython environment
 \cite{perez2007ipython} is priceless for interactive work.
 
-\paragraph{Some history}
+\paragraph{Some history.}
 %
 Scikit-learn started circa 2007 as code from David Cournapeau and
 Matthieu Brucher's PhD work, but dwindled down till 2010, year at which the
@@ -194,7 +194,7 @@ thus the risk of overfit increases. This core difficulty is known as the
 
 \section{Learning with scikit-learn}
 
-\paragraph{Setting up models and feeding them data}
+\paragraph{Setting up models and feeding them data.}
 %
 Models in scikit-learn, called \emph{estimators}, are objects
 instantiated with all parameters that describe them, but with data. They
@@ -208,7 +208,7 @@ predicting for each sample to which class it belongs. The data seldom
 come in this form, and they must be adapted to be suitable for
 consumption by estimators.
 
-\paragraph{Supervised models: learning to predict}
+\paragraph{Supervised models: learning to predict.}
 %
 The goal of supervised models is prediction. The corresponding estimators
 have a {\tt predict} method, that takes a data matrix $\mathbf{X}$ and
@@ -219,11 +219,11 @@ returns a predicted $\mathbf{y}$.
 % before where it is going to be printed
 \lstinputlisting[lastline=12]{nlp_example.py}
 \caption{Simple text-processing code to download movie reviews from
-Internet and learn positive versus negative ratings.}
+Internet and learn positive versus negative ratings.\label{fig:code}}
 \end{figure*}
 
 
-\paragraph{Model evaluation and parameter selection}
+\paragraph{Model evaluation and parameter selection.}
 %
 The data used to train a model can be used to measure the prediction
 error, as it would be enable to distinguish noise from signal, and thus
@@ -243,7 +243,7 @@ cross-validation internally to set its parameter. When used together with
 {\tt cross\_val\_score}, they perform \emph{nested} cross-validation,
 \emph{i.e.}~the meta-parameters are set independently of the test data?
 
-\paragraph{Unsupervised models: learning to transform}
+\paragraph{Unsupervised models: learning to transform.}
 %
 Unsupervised learning covers all learning applications in which there is
 no clearly identified variable to predict. For instance, in a clustering
@@ -260,59 +260,44 @@ for this purpose. A {\tt Pipeline} estimator can then chain estimators to
 form a new estimator that applies transformations before calling the {\tt
 fit} or {\tt predict} method of the last object.
 
-\section{In practice}
+\section{In practice: putting scikit-learn to good use}
 
-\paragraph{A simple text-mining example}
+\paragraph{A simple text-mining example.}
 %
-Scikit-learn was designed around NumPy principles and data structures,
-so virtually all estimators take arrays of numbers as input
-and produce arrays as output.
-That doesn't mean that it is limited to traditional number crunching domains,
-though.
-The library has been successfully employed in text classification
-and natural language processing problems,
-and utility code is provided to translate the unstructured, symbolic data
-encountered in these domains
-to the rigid matrix/vector structure that estimators expect.
+Not every dataset comes as a set of numbers. For instance in natural
+language processing (NLP), each observation is a text, \emph{i.e.} a
+string, that needs to be transformed into the data matrix expected by
+estimators. Typical, features used to build decisions indicate the
+presence of certain words, and often their frequencies.
+In spam filtering, it can very relevant to extract from a document that
+it contains the term \textsf{viagra}, and possibly how many times.
+In other NLP problems such as finding proper names,
+events such as ``next token is the Roman numeral'' may be relevant, as in
+``J.P. Kennedy III''. Counting bigrams, or $n$-grams, can be a way of
+capturing this information. Reusing the {\tt transform} API, scikit-learn
+provide a few \emph{feature extraction} objects, that can turn such
+unstructured data into a data matrix.
+The $\textbf{X}$ matrix is in these situations a
+matrix of counting statistics. It is full of zeros, in the sens that very
+often a word is present only in a few documents. For better scalability,
+it can be encoded using SciPy's sparse matrices, that many scikit-learn
+estimators process efficiently.
 
-In the NLP application domain,
-features are typically frequencies or boolean indicators
-of very large numbers of rare events.
-In document classification tasks such spam filtering,
-these events may be booleans indicating
-``document contains the term \textsf{v1agr@}''
-(and so on for all words encountered in the training set).
-In other NLP problems such as finding proper names and their classes (NER),
-events such as ``next token matches the Roman numeral regex'' may be used.
-To ensure scalability in the face of such extremely high-dimensional data,
-SciPy's sparse matrix data structures are supported by many estimators.\footnote{
-  Support for these is added on a by-need basis,
-  because using sparse data structures puts constraints on algorithm design
-  and implementation.
-}
-
-The following example script is a fully functioning
-sentiment polarity classifier for movie reviews:
-given a review, it outputs the probability that the review is positive
-about the movie it concerns.
-The script demonstrates the use of pipelines,
-and also shows how machine learning ties into Python's
-``batteries included'' philosophy:
-downloading, unpacking and learning from a dataset
-are all done in one programming language.
-
+On Fig.\,\ref{fig:code} we give an example of fully functioning code to
+do sentiment polarity classification for movie reviews: given a review,
+it outputs whether the review is positive about the movie it concerns.
+The code demonstrates the use of pipelines, and also shows how machine
+learning ties into unrelated Python's modules: downloading, unpacking and
+learning from a dataset are all done in one programming language.
 
 This script first fetches the hand-labeled movie review dataset from
 \cite{pang2004} and unpacks it to disk using standard Python libraries.
-It then loads these into memory using the scikit-learn function
-\texttt{load\_files}, makes a pipeline of a \textsf{tf--idf} feature extractor
-\cite{rennie2003tackling} and logistic regression,
-and finally trains the model.
-The feature extractor (vectorizer) takes text as strings
-and produces a sparse matrix of weights based on frequencies.
-The parameters for the feature extractor and the LogReg classifier
-were tuned offline; the random-number generator seed is set by hand
-to get reproducible results.
+It then loads these using scikit-learn data loading functions, makes a
+pipeline of a \textsf{tf--idf} feature extractor
+\cite{rennie2003tackling} --than turns strings into a sparse matrix based
+on word frequencies-- and logistic regression, and finally trains the
+model. The parameters for the feature extractor and the LogReg classifier
+were set manually.
 
 Does this classifier work?
 We can find out by classifying two of our own movie reviews.\footnote{

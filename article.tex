@@ -289,6 +289,8 @@ SciPy's sparse matrix data structures are supported by many estimators.\footnote
 
 \begin{figure*}
 \lstinputlisting[lastline=12]{nlp_example.py}
+\caption{Simple text-processing code to download movie reviews from
+Internet and learn positive versus negative ratings.}
 \end{figure*}
 
 The following example script is a fully functioning
@@ -301,29 +303,6 @@ and also shows how machine learning ties into Python's
 downloading, unpacking and learning from a dataset
 are all done in one programming language.
 
-% XXX make_pipeline is not in 0.14.1, we should release 0.15 sometime
-% The example can be made a bit shorter by skipping the movie_reviews dir;
-% the tarball from Pang et al. contain top-level cruft.
-%\begin{lstlisting}
-%import os.path
-%import tarfile
-%from urllib import urlretrieve
-%from sklearn.datasets import load_files
-%from sklearn.feature_extraction.text import TfidfVectorizer
-%from sklearn.linear_models import LogisticRegression
-%from sklearn.pipeline import make_pipeline
-%
-%temp, _ = urlretrieve('http://preview.tinyurl.com/review-tgz')
-%with tarfile.open(temp) as tar:
-%    tar.extractall(path='movie_reviews')
-%data = load_files(os.path.join('movie_reviews', 'txt_sentoken'))
-%
-%clf = make_pipeline(TfidfVectorizer(min_df=2, dtype=float,
-%                                    sublinear_tf=True, ngram_range=(1, 2),
-%                                    strip_accents='unicode'),
-%                     LogisticRegression(random_state=623, C=5000))
-%clf.fit(data.data, data.target)
-%\end{lstlisting}
 
 This script first fetches the hand-labeled movie review dataset from
 \cite{pang2004} and unpacks it to disk using standard Python libraries.

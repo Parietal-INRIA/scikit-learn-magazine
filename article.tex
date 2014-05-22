@@ -131,22 +131,22 @@ goal of making decision on new data \cite{elemstatlearn}. As a simple example, w
 Fig.\,\ref{fig:data} data about wages in the US, from \cite{berndt1991}:
 11 features, including wage, number of years of education and of work
 experience, on 534 individuals --samples in machine-learning
-jargon. This data
+jargon. 
 Code downloading the data to reproduce the figures can be found on
 \url{https://github.com/scikit-learn/SigMobile-paper}.
 %
-This data showcases many of the typical difficulties machine learning.
-The samples are very irregularly distributed, as most individuals
-finished their education after high-school. As a result, they are gapping
-holes in the 2D plot education versus work experience, in which any
+This data showcases many of the typical difficulties in machine learning.
+Samples are very irregularly distributed, as most individuals
+finished studies after high-school. As a result, there are gapping
+holes in the 2D plot of education versus work experience, in which any
 statistical analysis is extrapolation. The data is very noisy: for a
 given education and work experience wages vary widely. This variability
-can probably be explained with missing factors, such as sector of
+is probably explained by missing factors, such as sector of
 activity, but adding them to the analysis creates a more complex picture,
 in 3D or more, rather than 2D, with even more gaps.
 
 On Fig.\,\ref{fig:random_forest}, we use a popular machine-learning
-algorithm, Random Forests, to try to predict the wage from the years of
+algorithm, Random Forests, to predict the wage from the years of
 education, or the years of work experience, either as separate features,
 or combined. The patchy square appearance of the prediction is due to the
 inners of the algorithm, and it illustrates the corresponding
@@ -173,7 +173,7 @@ training data.
 
 On Fig.\,\ref{fig:linear_svm}, we use another popular machine-learning
 algorithm, linear Support Vector Machines (SVMs). Unlike random forests,
-it can only learn decisions made with linear functions. It is said that
+it learns decisions with linear functions. It is said that
 it has a lower \emph{model complexity}, because the number of parameters
 to learn from the data is much smaller. The risk here is to
 \emph{underfit}: not fully use the richness of the data, that may not be
@@ -324,22 +324,22 @@ array([0.9026946, 0.8723724, 0.8633634])
 %
 ``Big data'' is the latest trend of data analytics: applying machine
 learning to large datasets can extract information so far unexploited.
-These large datasets present of course new technical challenges, in
+These large datasets present new technical challenges, in
 particular to be computationally tractable. It is important to
 distinguish the case of very large number of samples, or very large
 number of features. For a very large number of features, on-the-fly data
 reductions, that exploit latent redundancy in the features, come in
-handy. In scikit-learn, one could for instance resort to
+handy. In scikit-learn, one could for instance use
 random projections, that exploit the Johnson-Lindenstrauss lemma to give
-good approximations of Euclidean distances in the dataset. In the
-situation of a very large number of samples, some estimator expose
+good approximations of Euclidean distances in the dataset. For
+a very large number of samples, some estimators expose
 \emph{on-line} algorithms: they can be fit incrementally, with successive
 calls to their {\tt partial\_fit} method, and converge in a small number
 of passes on the data. To alleviate one of the main practical challenges of
 big data, data-transfer latency, optimal data-fetching code can be used
 in parallel with the calls to {\tt partial\_fit}.
 
-Dealing with a large corpus of text, faces both challenges: many samples,
+Dealing with a large corpus of text faces both challenges: many samples,
 and a very high dimensional space. In addition, the dimensionality
 tends to increase with sample size, as the number of different words used 
 is greater in large corpuses. Beyond the mere size of the data matrix

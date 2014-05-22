@@ -241,7 +241,7 @@ specific estimators, \emph{meta-estimators}, such as the {\tt
 GridSearchCV}, take another estimator at construction time, and use
 cross-validation internally to set its parameter. When used together with
 {\tt cross\_val\_score}, they perform \emph{nested} cross-validation,
-\emph{i.e.}~the meta-parameters are set independently of the test data?
+\emph{i.e.}~the meta-parameters are set independently of the test data.
 
 \paragraph{Unsupervised models: learning to transform.}
 %
@@ -265,20 +265,20 @@ fit} or {\tt predict} method of the last object.
 \paragraph{A simple text-mining example.}
 %
 Not every dataset comes as a set of numbers. For instance in natural
-language processing (NLP), each observation is a text, \emph{i.e.} a
+language processing (NLP), each observation is a text, \emph{i.e.}~a
 string, that needs to be transformed into the data matrix expected by
 estimators. Typical, features used to build decisions indicate the
 presence of certain words, and often their frequencies.
 In spam filtering, it can very relevant to extract from a document that
 it contains the term \textsf{viagra}, and possibly how many times.
-In other NLP problems such as finding proper names,
+In other NLP problems, such as finding proper names,
 events such as ``next token is the Roman numeral'' may be relevant, as in
-``J.P. Kennedy III''. Counting bigrams, or $n$-grams, can be a way of
-capturing this information. Reusing the {\tt transform} API, scikit-learn
-provide a few \emph{feature extraction} objects, that can turn such
+``J.P. Kennedy III''. A way to capture this information is to count bigrams,
+or $n$-grams. Reusing the {\tt transform} API, scikit-learn
+provides \emph{feature extraction} objects, that  such
 unstructured data into a data matrix. In these situations, the
 $\textbf{X}$ matrix is a
-matrix of counting statistics. It is full of zeros, in the sens that very
+matrix of counting statistics. It is full of zeros, in the sens that
 often a word is present only in a few documents. For better scalability,
 it can be encoded using SciPy's sparse matrices, that many scikit-learn
 estimators process efficiently.
@@ -289,14 +289,13 @@ it outputs whether the review is positive about the movie it concerns.
 The code demonstrates the use of pipelines, and also shows how machine
 learning ties into unrelated Python's modules: downloading, unpacking and
 learning from a dataset are all done in one programming language.
-
 This script first fetches the hand-labeled movie review dataset from
 \cite{pang2004} and unpacks it to disk using standard Python libraries.
 It then loads these using scikit-learn data loading functions, makes a
 pipeline of a \textsf{tf--idf} feature extractor
 \cite{rennie2003tackling} --than turns strings into a sparse matrix based
 on word frequencies-- and logistic regression, and finally trains the
-model. The parameters for the feature extractor and the LogReg classifier
+model. Parameters for the feature extractor and the LogReg classifier
 were set manually.
 
 We can test our classifier on two new movie reviews.\footnote{
@@ -314,7 +313,7 @@ a batch of two reviews. The first review is predicted has being not
 positive, \emph{i.e.} negative, while the second one is positive. We have
 anecdotal evidence that the classifier work. To get a measure for the
 classifier's accuracy we retraining it in a cross-validation scheme, this
-yield the fraction of correct answers on three different folds:
+yields the fraction of correct answers on three different folds:
 \begin{lstlisting}
 >>> from sklearn import cross_validation
 >>> cross_validation.cross_val_score(clf, data.data, data.target)

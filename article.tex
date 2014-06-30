@@ -356,20 +356,41 @@ table is known from the hash size.
 
 The greatest asset of the scikit-learn project is its breadth of
 contributors, coming from different backgrounds, working in different
-institutions, with a variety of applications --xxx contributors total,
-xxx active core contributors in the past year--. Indeed, not only is
-there strength in numbers, but also the convergence of points of views
+institutions, with a variety of applications --more than 200 contributors
+total, 15 active core contributors in the past year. Indeed, not only
+is there strength in numbers, but also the convergence of points of views
 make better code and better design. From a developer's perspective, the
 project thus is managed with the goals of enabling newcomers to
-contribute with a tightly controlled process.
+contribute while keeping a high quality assurance. For these purposes, we
+rely heavily on Github --\url{http://github.com}-- with an online
+development workflow relying on distributed version control using git,
+and intensive code review. The code review process is a great asset to
+raising the quality of the code, from all points of view: algorithmic,
+numerical robustness, homogeneity of APIs, ease of use, documentation.
+Another central aspect for quality in the project is the heavy use of
+unit testing (up to 88\% of the lines of code are covered), run
+continuously on all contributions thanks to the travis platform
+(\url{http://travis-ci.org}).
 
-Github, tests (link to travis)
+The open-source, community-driven model of scikit-learn has fantastically
+payed off. However, we find that it does not fit in the standard
+professional incentive structure, whether it be in academia or in the
+industry. Indeed, getting due credit for grass-root, free, software that
+"just works" is difficult. None of the grant proposals submitted to fund
+development by core contributors have so far been accepted, and there is
+no straightforward revenue model. Even more challenging is rewarding
+properly the long tail of small contributors. Finally, active
+contributors tend to be victim of the project's success, and be promoted
+to leading positions which leave them little time.
 
-Difficulty of getting credit, of rewarding properly the long tail of small
-contributors, of finding funding. Problem of brain drain.
-
-Difficulty of project scope (ideally: first cover all of statistical
-learning classics \cite{elemstatlearn}) and default parameters
+Scikit-learn has become a reference machine learning toolkit. As such, it
+should offer a wide variety of learning algorithms. However, each new
+feature, each new line of code comes with a significant maintenance cost.
+Uncontrolled growth would lead the project to pick up weight until it
+comes to a crawl. The difficulty lies in defining the project scope and
+prioritizing methods. We strive to integrate all classical methods that
+are most useful for prediction tasks. We favor time-tested algorithm and
+put great care in the choice of default parameters.
 
 We have found that implementing, even a standard algorithm, really well,
 can require a lot of domain knowledge. Thus it is natural that specific

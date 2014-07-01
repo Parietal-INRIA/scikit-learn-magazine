@@ -53,7 +53,7 @@ Machine learning is a pervasive development at the intersection of
 statistics and computer science. While it can benefit many
 data-related applications, the technicality of the research literature
 and the corresponding algorithms slows down its adoption. Scikit-learn is
-a open-source software project that aims at making machine learning
+an open-source software project that aims at making machine learning
 accessible to all, whether it be in academia or in the industry. It
 benefits from
 the general-purpose Python language, that enjoys a huge growth in
@@ -67,12 +67,13 @@ machine-learning basics.
 \paragraph{Project vision.}
 %
 Scikit-learn was born from the observation that most standard
-machine-learning algorithms were out of reach of the users that could
+machine learning algorithms were out of reach of the users that could
 most benefit from them: researchers --biologists, climate
 scientists, experimental physicists-- or developers of web
 services or domain-specific applications.
 %
-Implementations mostly consisted of scattered pieces of code to download
+Implementations of these algorithms
+mostly consisted of scattered pieces of code to download
 on researchers' web pages, with the notable exception of
 statistic-specific environments such as the R language \cite{Rmanual}, or
 the Weka Java library \cite{hall2009weka}.
@@ -113,7 +114,7 @@ engineer. Basic APIs were defined and an efficient binding of LibSVM
 \cite{chang2011libsvm} gave the project a compelling advantage. In
 December 2011, the first international sprint was organized with generous
 funding from Google. Today, the project has grown vastly beyond
-INRIA into a worldwide open source effort.
+INRIA into a worldwide open source effort with more than 200 contributors.
 
 \section{A brief introduction to machine learning}
 
@@ -130,8 +131,8 @@ Machine learning is about extracting rules from data, most often with the
 goal of making decision on new data \cite{elemstatlearn}. As a simple example, we show in
 Fig.~\ref{fig:data} data about wages in the US, from \cite{berndt1991}:
 11 \emph{features}, including wage, number of years of education and of work
-experience, on 534 individuals -- called \emph{samples} in machine-learning
-jargon.
+experience, describe 534 individuals,
+called \emph{samples} in machine-learning jargon.
 Code downloading the data to reproduce the figures can be found on
 \url{https://github.com/scikit-learn/SigMobile-paper}.
 %
@@ -154,7 +155,7 @@ inners of the algorithm, and it illustrates the corresponding
 extrapolation mechanism. The predictions fit the data well; maybe too
 well, as, on the prediction solely from the years of education (left of
 the figure), it is hard to believe in the bump at 5 years. This bump is
-probably a classic case of \emph{overfit}: the algorithm is learning its
+probably a classic case of \emph{overfitting}: the algorithm is learning its
 prediction from noise in the data. As a result, the prediction error on
 new data will be significantly different than that measured on the
 training data.
@@ -179,7 +180,7 @@ it has a lower \emph{model complexity}, because the number of parameters
 to learn from the data is much smaller. The risk here is to
 \emph{underfit}: not fully use the richness of the data, that may not be
 following a linear law. The art of machine learning consists in choosing
-the right family of algorithms (or models) to describe the data well and
+the right family of algorithms/models to describe the data well and
 find the sweet spot between under and over fit. As the number of features
 describing the data grows, the number of parameters to learn grows, and
 thus the risk of overfit increases. This core difficulty is known as the
@@ -208,6 +209,7 @@ in the wages prediction, or integers for classification, that is
 predicting for each sample to which class it belongs. The data seldom
 come in this form, and they must be adapted to be suitable for
 consumption by estimators.
+Scikit-learn comes with flexible feature extraction code to solve this problem.
 
 \paragraph{Supervised models: learning to predict.}
 %
@@ -226,8 +228,8 @@ Internet and learn positive versus negative ratings.\label{fig:code}}
 
 \paragraph{Model evaluation and parameter selection.}
 %
-The data used to train a model can be used to measure the prediction
-error, as it would be enable to distinguish noise from signal, and thus
+The data used to train a model cannot be used to measure the prediction
+error, as it would be unable to distinguish noise from signal, and thus
 overly optimistic. The correct way is to leave out \emph{test} data,
 untouched during training. Often a \emph{cross-validation} scheme is
 used, where the data is repeatedly split into \emph{train} and
@@ -256,7 +258,7 @@ unsupervised learning are very diverse, it is not possible to have an API
 as uniform as for supervised learning. While some unsupervised
 estimators can be used to predict a characteristic of new data, such as
 in novelty detection, many are useful to transform data, as in dimension
-random. Scikit-learn estimators can have a {\tt transform} method, used
+reduction. Scikit-learn estimators can have a {\tt transform} method, used
 for this purpose. A {\tt Pipeline} estimator can then chain estimators to
 form a new estimator that applies transformations before calling the {\tt
 fit} or {\tt predict} method of the last object.
@@ -271,10 +273,10 @@ which needs to be transformed into the data matrix expected by
 estimators. Often, features used to build decisions indicate the
 presence of certain words, or their frequencies.
 In spam filtering, it can be very relevant to extract from a document that
-it contains the term \textsf{viagra}.
+it contains the term ``casino''.
 In other NLP problems, such as finding proper names,
 events such as ``next token is a Roman numeral'' may be relevant, as in
-``J.P. Kennedy III''.
+``J.P. Kennedy III.''
 Reusing the {\tt transform} API, scikit-learn
 provides \emph{feature extraction} objects, that turn such
 unstructured data into a data matrix. In these situations, the
@@ -310,9 +312,9 @@ We can test our classifier on two new movie reviews.\footnote{
 array([0, 1])
 \end{lstlisting}
 
-Here, we asked the estimator to predict if the reviews were positive for
-a batch of two reviews. The first review is predicted has being not
-positive, \emph{i.e.} negative, while the second one is positive. We have
+Here, we asked the estimator to predict whether the reviews were positive
+The first review is predicted as being negative (0),
+while the second is positive (1). We have
 anecdotal evidence that the classifier works. To get a measure for the
 classifier's accuracy we retrain it in a cross-validation scheme.
 This yields the fraction of correct answers on three different folds:

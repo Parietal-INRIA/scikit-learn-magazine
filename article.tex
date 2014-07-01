@@ -330,34 +330,41 @@ array([0.9026946, 0.8723724, 0.8633634])
 
 \paragraph{What about big data?}
 %
-``Big data'' is the latest trend of data analytics: applying machine
+\emph{Big data} is a major trend in data analytics: applying machine
 learning to large datasets can extract information so far unexploited.
-These large datasets present new technical challenges, in
-particular to be computationally tractable. It is important to
-distinguish between the case of very large number of samples and the case of large
-number of features. For a very large number of features, on-the-fly data
-reductions, that exploit latent redundancy in the features, come in
-handy. In scikit-learn, one could for instance use
-random projections, that exploit the Johnson-Lindenstrauss lemma to give
-good approximations of Euclidean distances in the dataset. For
-a very large number of samples, some estimators expose
-\emph{on-line} algorithms: they can be fit incrementally, with successive
-calls to their {\tt partial\_fit} method, and converge in a small number
-of passes on the data. To alleviate one of the main practical challenges of
-big data, data-transfer latency, optimal data-fetching code can be used
-in parallel with the calls to {\tt partial\_fit}.
+While scikit-learn is most efficient in the ``medium data'' range,
+using shared memory multiprocessors rather than clusters,
+it has facilities for dealing with datasets that don't fit
+in any single machine.
 
-Dealing with a large corpus of text faces both challenges: many samples,
-and a very high dimensional space. In addition, the dimensionality
-tends to increase with sample size, as the number of different words used
-is greater in large corpuses. Beyond the mere size of the data matrix
-created by a standard vectorization approach, as above, another challenge
+Thinking in terms of the $(n \times p)$ data matrix,
+we can distinguish between the case of large numbers of samples $n$,
+and large numbers of features $p$.
+For a large number of features, scikit-learn's options include
+random projections, which reduce data dimensionality
+while preserving most of the geometric structure.
+For the ``large $n$'' case, some estimators expose a \texttt{partial\_fit}
+method that does \emph{online learning}.
+Instead of stashing all of the data in a single matrix,
+the user can feed the estimator slices of the matrix,
+and the algorithm finds a good approximation to its objective
+after a few passes over the dataset.
+
+% The citation is for "Heaps' law":
+% vocabulary size as a function of collection size.
+% Gael, feel free to remove it if you think it's too detailed.
+With large collections of text, one faces both challenges:
+the dimensionality $p$
+tends to increase with sample size $n$, as the number of different words used
+is greater in large collections \cite[88--89]{manning2009}.
+Beyond the mere size of the data matrix
+created by a standard vectorization approach, outlined earlier, another challenge
 is that the vectorization must be done in two passes over the documents,
-as the size of the output vectors is not known beforehand.
+as the size of the output vectors is not known up front.
 Here, \emph{feature hashing} can be used
 to tackle both of these challenges and produce a streaming vectorizer,
 the {\tt HashingVectorizer} in scikit-learn.
-The idea is to run words through a hash function, rather than a lookup table,
+Words are run through a (stateless) hash function, rather than a lookup table,
 to map words to indices.
 Collisions may occur, but the hashing algorithm \cite{weinberger2009}
 is specially designed to mitigate their effect.

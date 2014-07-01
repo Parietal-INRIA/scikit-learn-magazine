@@ -265,23 +265,24 @@ fit} or {\tt predict} method of the last object.
 \paragraph{A simple text-mining example.}
 %
 Not every dataset comes as a set of numbers. For instance in natural
-language processing (NLP), each observation is a text, \emph{i.e.}~a
-string, that needs to be transformed into the data matrix expected by
-estimators. Typical, features used to build decisions indicate the
-presence of certain words, and often their frequencies.
-In spam filtering, it can very relevant to extract from a document that
-it contains the term \textsf{viagra}, and possibly how many times.
+language processing (NLP), observations are strings,
+which needs to be transformed into the data matrix expected by
+estimators. Often, features used to build decisions indicate the
+presence of certain words, or their frequencies.
+In spam filtering, it can be very relevant to extract from a document that
+it contains the term \textsf{viagra}.
 In other NLP problems, such as finding proper names,
-events such as ``next token is the Roman numeral'' may be relevant, as in
-``J.P. Kennedy III''. A way to capture this information is to count bigrams,
-or $n$-grams. Reusing the {\tt transform} API, scikit-learn
-provides \emph{feature extraction} objects, that  such
+events such as ``next token is a Roman numeral'' may be relevant, as in
+``J.P. Kennedy III''.
+Reusing the {\tt transform} API, scikit-learn
+provides \emph{feature extraction} objects, that turn such
 unstructured data into a data matrix. In these situations, the
-$\textbf{X}$ matrix is a
-matrix of counting statistics. It is full of zeros, in the sens that
-often a word is present only in a few documents. For better scalability,
-it can be encoded using SciPy's sparse matrices, that many scikit-learn
-estimators process efficiently.
+$\textbf{X}$ matrix is a matrix of counting statistics.
+Since each word is typically present in only a few documents,
+the data matrix will be mostly zeros.
+SciPy offers a \emph{sparse matrix} package
+that stores the zeros in such matrices implicitly,
+and many scikit-learn estimators use that package to improve scalability.
 
 On Fig.\,\ref{fig:code} we give an example of fully functioning code to
 do sentiment polarity classification for movie reviews: given a review,
@@ -289,13 +290,13 @@ it outputs whether the review is positive about the movie it concerns.
 The code demonstrates the use of pipelines, and also shows how machine
 learning ties into unrelated Python's modules: downloading, unpacking and
 learning from a dataset are all done in one programming language.
-This script first fetches the hand-labeled movie review dataset from
+This script first fetches a hand-labeled movie review dataset
 \cite{pang2004} and unpacks it to disk using standard Python libraries.
 It then loads these using scikit-learn data loading functions, makes a
 pipeline of a \textsf{tf--idf} feature extractor
-\cite{rennie2003tackling} --than turns strings into a sparse matrix based
+\cite{rennie2003tackling} --that turns strings into a sparse matrix based
 on word frequencies-- and logistic regression, and finally trains the
-model. Parameters for the feature extractor and the LogReg classifier
+model. Parameters for the feature extractor and the classifier
 were set manually.
 
 We can test our classifier on two new movie reviews.\footnote{
@@ -362,7 +363,7 @@ is there strength in numbers, but also the convergence of points of views
 make better code and better design. From a developer's perspective, the
 project thus is managed with the goals of enabling newcomers to
 contribute while keeping a high quality assurance. For these purposes, we
-rely heavily on Github --\url{http://github.com}-- with an online
+rely heavily on Github (\url{http://github.com}) with an online
 development workflow relying on distributed version control using git,
 and intensive code review. The code review process is a great asset to
 raising the quality of the code, from all points of view: algorithmic,

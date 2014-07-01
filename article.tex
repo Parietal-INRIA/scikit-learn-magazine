@@ -313,8 +313,8 @@ Here, we asked the estimator to predict if the reviews were positive for
 a batch of two reviews. The first review is predicted has being not
 positive, \emph{i.e.} negative, while the second one is positive. We have
 anecdotal evidence that the classifier work. To get a measure for the
-classifier's accuracy we retrain it in a cross-validation scheme, this
-yields the fraction of correct answers on three different folds:
+classifier's accuracy we retrain it in a cross-validation scheme.
+This yields the fraction of correct answers on three different folds:
 \begin{lstlisting}
 >>> from sklearn import cross_validation
 >>> cross_validation.cross_val_score(clf, data.data, data.target)

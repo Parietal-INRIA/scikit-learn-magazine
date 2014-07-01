@@ -53,9 +53,9 @@ Machine learning is a pervasive development at the intersection of
 statistics and computer science. While it can benefit many
 data-related applications, the technicality of the research literature
 and the corresponding algorithms slows down its adoption. Scikit-learn is
-a open-source software project that aims to make machine learning
+a open-source software project that aims at making machine learning
 accessible to all, whether it be in academia or in the industry. It
-benefits from 
+benefits from
 the general-purpose Python language, that enjoys a huge growth in
 the scientific world, as well as a striving ecosystem of contributors.
 Here we give a quick introduction to scikit-learn as well as to
@@ -72,12 +72,12 @@ most benefit from them: researchers --biologists, climate
 scientists, experimental physicists-- or developers --for web
 services or domain-specific applications.
 %
-Implementations mostly consisted of scattered piece of code to download
+Implementations mostly consisted of scattered pieces of code to download
 on researchers' web pages, with the notable exception of
 statistic-specific environments such as the R language \cite{Rmanual}, or
-the Weka java library \cite{hall2009weka}.
+the Weka Java library \cite{hall2009weka}.
 
-Scikit-learn aims to bridge the gap between machine-learning research and
+Scikit-learn aims at bridging the gap between machine-learning research and
 applications by providing a library, and not an environment, in a
 general-purpose language, relying on domain-agnostic data structures
 \cite{pedregosa2011}. Emphasis is put on quality and ease of use, which
@@ -129,9 +129,9 @@ INRIA into a worldwide open source effort.
 Machine learning is about extracting rules from data, most often with the
 goal of making decision on new data \cite{elemstatlearn}. As a simple example, we show on
 Fig.\,\ref{fig:data} data about wages in the US, from \cite{berndt1991}:
-11 features, including wage, number of years of education and of work
-experience, on 534 individuals --samples in machine-learning
-jargon. 
+11 \emph{features}, including wage, number of years of education and of work
+experience, on 534 individuals -- called \emph{samples} in machine-learning
+jargon.
 Code downloading the data to reproduce the figures can be found on
 \url{https://github.com/scikit-learn/SigMobile-paper}.
 %
@@ -235,7 +235,7 @@ cross-validation. Specific iterators are used to describe the subsets and
 several functions and objects accept as arguments these iterators to
 perform cross-validation internally. For instance the {\tt
 cross\_val\_score} function measures the prediction score of an
-estimator. Cross-validation can also be used to tuned the meta-parameters
+estimator. Cross-validation can also be used to tune the meta-parameters
 of an estimator, such as the sparsity of a sparse model. For this,
 specific estimators, \emph{meta-estimators}, such as the {\tt
 GridSearchCV}, take another estimator at construction time, and use
@@ -267,18 +267,18 @@ fit} or {\tt predict} method of the last object.
 Not every dataset comes as a set of numbers. For instance in natural
 language processing (NLP), each observation is a text, \emph{i.e.}~a
 string, that needs to be transformed into the data matrix expected by
-estimators. Typical, features used to build decisions indicate the
+estimators. Typically, features used to build decisions indicate the
 presence of certain words, and often their frequencies.
-In spam filtering, it can very relevant to extract from a document that
+In spam filtering, it can be very relevant to extract from a document that
 it contains the term \textsf{viagra}, and possibly how many times.
 In other NLP problems, such as finding proper names,
 events such as ``next token is the Roman numeral'' may be relevant, as in
 ``J.P. Kennedy III''. A way to capture this information is to count bigrams,
 or $n$-grams. Reusing the {\tt transform} API, scikit-learn
-provides \emph{feature extraction} objects, that  such
+provides \emph{feature extraction} objects, that transform such
 unstructured data into a data matrix. In these situations, the
 $\textbf{X}$ matrix is a
-matrix of counting statistics. It is full of zeros, in the sens that
+matrix of counting statistics. It is full of zeros, in the sense that
 often a word is present only in a few documents. For better scalability,
 it can be encoded using SciPy's sparse matrices, that many scikit-learn
 estimators process efficiently.
@@ -293,7 +293,7 @@ This script first fetches the hand-labeled movie review dataset from
 \cite{pang2004} and unpacks it to disk using standard Python libraries.
 It then loads these using scikit-learn data loading functions, makes a
 pipeline of a \textsf{tf--idf} feature extractor
-\cite{rennie2003tackling} --than turns strings into a sparse matrix based
+\cite{rennie2003tackling} --that turns strings into a sparse matrix based
 on word frequencies-- and logistic regression, and finally trains the
 model. Parameters for the feature extractor and the LogReg classifier
 were set manually.
@@ -326,7 +326,7 @@ array([0.9026946, 0.8723724, 0.8633634])
 learning to large datasets can extract information so far unexploited.
 These large datasets present new technical challenges, in
 particular to be computationally tractable. It is important to
-distinguish the case of very large number of samples, or very large
+distinguish between the case of very large number of samples and the case of large
 number of features. For a very large number of features, on-the-fly data
 reductions, that exploit latent redundancy in the features, come in
 handy. In scikit-learn, one could for instance use
@@ -341,7 +341,7 @@ in parallel with the calls to {\tt partial\_fit}.
 
 Dealing with a large corpus of text faces both challenges: many samples,
 and a very high dimensional space. In addition, the dimensionality
-tends to increase with sample size, as the number of different words used 
+tends to increase with sample size, as the number of different words used
 is greater in large corpuses. Beyond the mere size of the data matrix
 created by a standard vectorization approach, as above, another challenge
 is that the vectorization must be done in two passes over the documents,
@@ -360,7 +360,7 @@ institutions, with a variety of applications --more than 200 contributors
 total, 15 active core contributors in the past year. Indeed, not only
 is there strength in numbers, but also the convergence of points of views
 make better code and better design. From a developer's perspective, the
-project thus is managed with the goals of enabling newcomers to
+project is managed with the goals of enabling newcomers to
 contribute while keeping a high quality assurance. For these purposes, we
 rely heavily on Github --\url{http://github.com}-- with an online
 development workflow relying on distributed version control using git,
@@ -369,7 +369,7 @@ raising the quality of the code, from all points of view: algorithmic,
 numerical robustness, homogeneity of APIs, ease of use, documentation.
 Another central aspect for quality in the project is the heavy use of
 unit testing (up to 88\% of the lines of code are covered), run
-continuously on all contributions thanks to the travis platform
+continuously on all contributions thanks to the Travis platform
 (\url{http://travis-ci.org}).
 
 The open-source, community-driven model of scikit-learn has fantastically

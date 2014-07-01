@@ -356,10 +356,7 @@ the {\tt HashingVectorizer} in scikit-learn.
 The idea is to run words through a hash function, rather than a lookup table,
 to map words to indices.
 Collisions may occur, but the hashing algorithm \cite{weinberger2009}
-is designed to mitigate their effect
-(and because words often have multiple meanings,
-``semantic'' collisions are inevitable in text processing tasks
-\cite{attenberg2009}).
+is specially designed to mitigate their effect.
 The dimensionality of the output vectors can be set by the user;
 the bigger, the less likely collisions will occur.
 

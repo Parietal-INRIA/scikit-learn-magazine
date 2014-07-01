@@ -151,7 +151,7 @@ algorithm, random forests, to predict the wage from the years of
 education, or the years of work experience, either as separate features,
 or combined. The patchy square appearance of the prediction is due to the
 inners of the algorithm, and it illustrates the corresponding
-extrapolation mechanism. The predictions fit the data very; maybe too
+extrapolation mechanism. The predictions fit the data well; maybe too
 well, as, on the prediction solely from the years of education (left of
 the figure), it is hard to believe in the bump at 5 years. This bump is
 probably a classic case of \emph{overfit}: the algorithm is learning its
@@ -313,7 +313,7 @@ array([0, 1])
 Here, we asked the estimator to predict if the reviews were positive for
 a batch of two reviews. The first review is predicted has being not
 positive, \emph{i.e.} negative, while the second one is positive. We have
-anecdotal evidence that the classifier work. To get a measure for the
+anecdotal evidence that the classifier works. To get a measure for the
 classifier's accuracy we retrain it in a cross-validation scheme.
 This yields the fraction of correct answers on three different folds:
 \begin{lstlisting}

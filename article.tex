@@ -346,12 +346,19 @@ tends to increase with sample size, as the number of different words used
 is greater in large corpuses. Beyond the mere size of the data matrix
 created by a standard vectorization approach, as above, another challenge
 is that the vectorization must be done in two passes over the documents,
-as the size of the output vector is not known before hand. Here, hashing,
-a trick similar to random projection, can be used to tackle both of these
-challenge and produce a streaming vectorizer, the {\tt HashingVectorizer}
-in scikit-learn. The idea is to use a hash table, storing hashes of the
-words, rather than the words themselves. The dimensionality of the hash
-table is known from the hash size.
+as the size of the output vectors is not known beforehand.
+Here, \emph{feature hashing} can be used
+to tackle both of these challenges and produce a streaming vectorizer,
+the {\tt HashingVectorizer} in scikit-learn.
+The idea is to run words through a hash function, rather than a lookup table,
+to map words to indices.
+Collisions may occur, but the hashing algorithm \cite{weinberger2009}
+is designed to mitigate their effect
+(and because words often have multiple meanings,
+``semantic'' collisions are inevitable in text processing tasks
+\cite{attenberg2009}).
+The dimensionality of the output vectors can be set by the user;
+the bigger, the less likely collisions will occur.
 
 \section{Nurturing an open source project}
 

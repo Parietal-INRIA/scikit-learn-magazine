@@ -198,18 +198,21 @@ thus the risk of overfit increases. This core difficulty is known as the
 
 \paragraph{Setting up models and feeding them data.}
 %
-Models in scikit-learn, called \emph{estimators}, are objects
-instantiated with all parameters that describe them, but with data. They
-have a {\tt fit} method, that accepts an $(n \times p)$ data matrix,
-$\mathbf{X}$ --NumPy array or SciPy sparse matrix--, where $n$ is the
-number of samples, and $p$ the number of features--, and possibly a
-quantity to predict, $\mathbf{y}$, also an array, 1D unless the
-prediction is \emph{multi-output}, with floats for a regression task, as
-in the wages prediction, or integers for classification, that is
-predicting for each sample to which class it belongs. The data seldom
-come in this form, and they must be adapted to be suitable for
-consumption by estimators.
-Scikit-learn comes with flexible feature extraction code to solve this problem.
+Learning algorithms in scikit-learn are embodied in \emph{estimators}:
+objects instantiated with parameters that control learning.
+Data is passed to the {\tt fit} method,
+which accepts an $(n \times p)$ data matrix $\mathbf{X}$,
+represented as a NumPy array or SciPy sparse matrix, where $n$ is the
+number of samples, and $p$ the number of features.
+When there is a quantity or class label to predict,
+a second argument $\mathbf{y}$ (usually a 1D array)
+contains the desired outcomes for the rows in $\mathbf{X}$.
+For a regression task such as wage prediction, these are real-valued,
+while in classification they are integers or strings that serve as labels
+for the class to which each sample belongs.
+Because data seldom arrives in this format,
+scikit-learn comes with flexible feature extraction code
+to make data suitable for consumption by estimators.
 
 \paragraph{Supervised models: learning to predict.}
 %

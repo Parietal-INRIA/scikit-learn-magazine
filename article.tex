@@ -345,8 +345,8 @@ random projections, which reduce data dimensionality
 while preserving most of the geometric structure.
 For the ``large $n$'' case, some estimators expose a \texttt{partial\_fit}
 method that does \emph{online learning}.
-Instead of stashing all of the data in a single matrix,
-the user can feed the estimator slices of the matrix,
+Instead of loading all of the data in a single huge matrix, the user
+can feed the estimator chunks of the data,
 and the algorithm finds a good approximation to its objective
 after a few passes over the dataset.
 
@@ -398,9 +398,10 @@ industry. Indeed, getting due credit for grass-root, free, software that
 "just works" is difficult. None of the grant proposals submitted to fund
 development by core contributors have so far been accepted, and there is
 no straightforward revenue model. Even more challenging is rewarding
-properly the long tail of small contributors. Finally, active
-contributors tend to be victim of the project's success, and be promoted
-to leading positions which leave them little time.
+properly the long tail of small contributors.
+%Finally, active
+%contributors tend to be victim of the project's success, and be promoted
+%to leading positions which leave them little time.
 
 Scikit-learn has become a reference machine learning toolkit. As such, it
 should offer a wide variety of learning algorithms. However, each new

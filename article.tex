@@ -234,10 +234,13 @@ returns a predicted $\mathbf{y}$.
 
 \paragraph{Model evaluation and parameter selection.}
 %
-The data used to train a model cannot be used to measure the prediction
-error, as it would be unable to distinguish noise from signal, and thus
-overly optimistic. The correct way is to leave out \emph{test} data,
-untouched during training. Often a \emph{cross-validation} scheme is
+The performance of a model measures its ability to correctly
+predict new data. Because of overfitting, the \emph{train} data used to build a
+model should in general not be used to also evaluate its performance, as it may often
+result in overly optimistic estimates of its true prediction error.
+Accordingly, the correct way to obtain an unbiased estimate is to leave out \emph{test} data,
+untouched during training and used for model evaluation only.
+Often a \emph{cross-validation} scheme is
 used, where the data is repeatedly split into \emph{train} and
 \emph{test} subsets. Scikit-learn provides a complete framework for
 cross-validation. Specific iterators are used to describe the subsets and
@@ -383,7 +386,7 @@ is there strength in numbers, but also the convergence of points of views
 make better code and better design. From a developer's perspective, the
 project is managed with the goals of enabling newcomers to
 contribute while keeping a high quality assurance. For these purposes, we
-rely heavily on Github (\url{http://github.com}) with an online
+rely heavily on GitHub (\url{http://github.com}) with an online
 development workflow relying on distributed version control using git,
 and intensive code review. The code review process is a great asset to
 raising the quality of the code, from all points of view: algorithmic,

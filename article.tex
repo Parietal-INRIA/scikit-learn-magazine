@@ -72,11 +72,13 @@ most benefit from them: researchers --biologists, climate
 scientists, experimental physicists-- or developers of web
 services or domain-specific applications.
 %
-Implementations of these algorithms
+In the scientific world, implementations of these algorithms
 mostly consisted of scattered pieces of code to download
-on researchers' web pages, with the notable exception of
-statistic-specific environments such as the R language \cite{Rmanual}, or
-the Weka Java library \cite{hall2009weka}.
+on researchers' web pages. Unifying efforts could be found in
+statistic-specific environments and libraries such as the R
+language \cite{Rmanual}, the Weka Java library \cite{hall2009weka}, or
+the Shogun C++ library \cite{sonnenburg2010}, but we felt that these were
+too technical to reach our target users, not versed in statistics.
 
 Scikit-learn aims at bridging the gap between machine-learning research and
 applications by providing a library, and not an environment, in a
@@ -196,6 +198,15 @@ thus the risk of overfit increases. This core difficulty is known as the
 
 \section{Learning with scikit-learn}
 
+\begin{figure*}[b]
+% To have the float on the bottom, we need this declared on the page
+% before where it is going to be printed
+\lstinputlisting[lastline=12]{nlp_example.py}
+\caption{Simple text-processing code to download movie reviews from
+Internet and learn positive versus negative ratings.\label{fig:code}}
+\end{figure*}
+
+
 \paragraph{Setting up models and feeding them data.}
 %
 Learning algorithms in scikit-learn are embodied in \emph{estimators}:
@@ -220,15 +231,6 @@ The goal of supervised models is prediction of some value of interest.
 The corresponding estimators
 have a {\tt predict} method, that takes a data matrix $\mathbf{X}$ and
 returns a predicted $\mathbf{y}$.
-
-\begin{figure*}[b]
-% To have the float on the bottom, we need this declared on the page
-% before where it is going to be printed
-\lstinputlisting[lastline=12]{nlp_example.py}
-\caption{Simple text-processing code to download movie reviews from
-Internet and learn positive versus negative ratings.\label{fig:code}}
-\end{figure*}
-
 
 \paragraph{Model evaluation and parameter selection.}
 %

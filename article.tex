@@ -235,12 +235,12 @@ returns a predicted $\mathbf{y}$.
 \paragraph{Model evaluation and parameter selection.}
 %
 The performance of a model measures its ability to correctly
-predict new data. Because of overfitting, the \emph{train} data used to build a
-model should in general not be used to also evaluate its performance, as it may often
-result in overly optimistic estimates of its true prediction error.
+predict new data. Because of overfitting, the \emph{train} data used for building
+should in general not be used to also evaluate model performance, as it may often
+result in overly optimistic estimates of the true prediction error of the model.
 Accordingly, the correct way to obtain an unbiased estimate is to leave out \emph{test} data,
 untouched during training and used for model evaluation only.
-Often a \emph{cross-validation} scheme is
+Alternatively, a \emph{cross-validation} scheme may also be
 used, where the data is repeatedly split into \emph{train} and
 \emph{test} subsets. Scikit-learn provides a complete framework for
 cross-validation. Specific iterators are used to describe the subsets and

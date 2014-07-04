@@ -73,16 +73,18 @@ scientists, experimental physicists-- or developers of web
 services or domain-specific applications.
 %
 In the scientific world, implementations of these algorithms
-mostly consisted of scattered pieces of code to download
+mostly consisted of scattered pieces of code %to download
 on researchers' web pages. Unifying efforts could be found in
 statistic-specific environments and libraries such as the R
-language \cite{Rmanual} or the Weka Java toolkit \cite{hall2009weka}.
+language \cite{Rmanual}, the Weka Java toolkit \cite{hall2009weka}, or the
+Shogun C++ library \cite{sonnenburg2010}.
 Of these, R is a custom \emph{language},
-while Java is a library with a custom GUI.
-The choice of Python ties machine learning into a general-purpose language
-that allows interactive programming \cite{perez2007ipython},
-with a single interface for
-interactive work, scripting and full-blown applications.
+while Java is a library with a custom GUI, and Shogun is a fairly
+technical C++ code base.
+In scikit-learn, we chose Python to reach many users, technical or not, tying machine learning
+into a general-purpose language good for simple
+ interactive programming \cite{perez2007ipython}, sophisticated
+scripting, as well as full-blown applications.
 
 Scikit-learn aims at bridging the gap between machine-learning research and
 applications by providing a library, and not an environment, in a
@@ -103,7 +105,7 @@ For its numerical needs, scikit-learn leverages NumPy arrays
 \cite{vanderwalt2011} --data structures for efficient numerical
 computation--, SciPy --a collection of classic numerical algorithms--,
 matplotlib \cite{hunter2007matplotlib} --for scientific plotting-- and
-Cython, to generate and call compiled code in a Python-like syntax
+Cython, to generate compiled code in a Python-like syntax
 \cite{behnel2011cython}.
 %
 A plethora of Python packages can help users with input or preprocessing
@@ -124,12 +126,20 @@ INRIA into a worldwide open source effort with more than 200 contributors.
 
 \section{A brief introduction to machine learning}
 
-\begin{figure}[b]
+\begin{figure}[t]
     %\hspace*{-.015\linewidth}%
     \includegraphics[width=1.05\linewidth]{wage_data}%
 
     \caption{Wage as a function of years of work experience and
     education; data from \cite{berndt1991}\label{fig:data}.}
+\end{figure}
+
+\begin{figure}[b]
+    %\hspace*{-.015\linewidth}%
+    \includegraphics[width=1.05\linewidth]{wage_data_random_forest}%
+
+    \caption{Wage prediction from years of work experience and education,
+    using random forests.\label{fig:random_forest}}
 \end{figure}
 
 % Introduce and describe the data
@@ -165,14 +175,6 @@ probably a classic case of \emph{overfitting}: the algorithm is learning its
 prediction from noise in the data. As a result, the prediction error on
 new data will be significantly different than that measured on the
 training data.
-
-\begin{figure}[b]
-    %\hspace*{-.015\linewidth}%
-    \includegraphics[width=1.05\linewidth]{wage_data_random_forest}%
-
-    \caption{Wage prediction from years of work experience and education,
-    using random forests.\label{fig:random_forest}}
-\end{figure}
 
 % then with svms, and discuss model complexity and use linear
 % models to link to convention statistics. Conclude with the difference
@@ -239,16 +241,17 @@ returns a predicted $\mathbf{y}$.
 \paragraph{Model evaluation and parameter selection.}
 %
 The performance of a model measures its ability to correctly
-predict new data. Because of overfitting, the \emph{train} data used for building
+predict new data. Because of overfitting, the \emph{train} data used for
+learning
 should in general not be used to also evaluate model performance, as it may often
 result in overly optimistic estimates of the true prediction error of the model.
 Instead, the correct way to obtain an unbiased estimate is to leave out \emph{test} data,
 untouched during training and used for model evaluation only.
 Alternatively, a \emph{cross-validation} scheme may also be
 used, where the data is repeatedly split into \emph{train} and
-\emph{test} subsets. Scikit-learn provides a complete framework for
-cross-validation. Specific iterators are used to describe the subsets and
-several functions and objects accept as arguments these iterators to
+\emph{test} subsets. Scikit-learn provides integrated support for
+cross-validation. Specific iterators can specify the train and test
+subsets. Several functions and objects accept these iterators as arguments to
 perform cross-validation internally. For instance the {\tt
 cross\_val\_score} function measures the prediction score of an
 estimator. Cross-validation can also be used to tune the meta-parameters
@@ -296,9 +299,9 @@ unstructured data into a data matrix. In these situations, the
 $\textbf{X}$ matrix is a matrix of counting statistics.
 Since each word is typically present in only a few documents,
 the data matrix will be mostly zeros.
-SciPy offers a \emph{sparse matrix} package
+SciPy offers a \emph{sparse matrix} object
 that stores the zeros in such matrices implicitly,
-and many scikit-learn estimators use that package to improve scalability.
+and many scikit-learn estimators can use this object to improve scalability.
 
 In Fig.~\ref{fig:code} we give an example of fully functioning code to
 do sentiment polarity classification for movie reviews: given a review,
@@ -404,7 +407,7 @@ The open-source, community-driven model of scikit-learn has fantastically
 payed off. However, we find that it does not fit in the standard
 professional incentive structure, whether it be in academia or in the
 industry. Indeed, getting due credit for grass-root, free, software that
-"just works" is difficult. None of the grant proposals submitted to fund
+``just works'' is difficult. None of the grant proposals submitted to fund
 development by core contributors have so far been accepted, and there is
 no straightforward revenue model. Even more challenging is rewarding
 properly the long tail of small contributors.
@@ -419,9 +422,10 @@ Uncontrolled growth would lead the project to pick up weight until it
 came to a crawl. The difficulty lies in defining the project scope and
 prioritizing methods. We strive to identify and integrate all major
 methods most useful for prediction tasks. We favor time-tested
-algorithms and put great care in the choice of default parameters. Our
-secret ambition is that the documentation, that we strive to make
-didactic and pragmatic, can provide an executable alternative to
+algorithms and put great care in the choice of default parameters. We put
+a lot of effort in making the documentation didactic and
+pragmatic. Our
+secret ambition is that it can provide an executable alternative to
 textbooks, with all the figures generated by code examples.
 
 %We have found that implementing, even a standard algorithm, really well,

@@ -334,7 +334,7 @@ The first review is predicted as being negative (0),
 while the second is positive (1). We have
 anecdotal evidence that the classifier works. To get a measure for the
 classifier's accuracy we retrain it in a cross-validation scheme.
-This yields the fraction of correct answers on three different folds:
+This scheme yields the fraction of correct answers on three different folds:
 \begin{lstlisting}
 >>> from sklearn import cross_validation
 >>> cross_validation.cross_val_score(clf, data.data, data.target)
@@ -404,7 +404,7 @@ unit testing (up to 88\% of the lines of code are covered), run
 continuously on all contributions thanks to the Travis platform
 (\url{http://travis-ci.org}).
 
-The open-source, community-driven model of scikit-learn has fantastically
+The open-source community-driven model of scikit-learn has fantastically
 payed off. However, we find that it does not fit in the standard
 professional incentive structure, whether it be in academia or in the
 industry. Indeed, getting due credit for grass-root, free, software that

@@ -7,7 +7,7 @@ data = datasets.load_files('txt_sentoken')             # and load it.
 
 clf = pipeline.make_pipeline(feature_extraction.text.TfidfVectorizer(min_df=2,
                                                  sublinear_tf=True, ngram_range=(1, 2)),
-                             linear_model.LogisticRegression(C=5))
+                             linear_model.LogisticRegression(C=5000))
 clf.fit(data.data, data.target)
 
 # Demo

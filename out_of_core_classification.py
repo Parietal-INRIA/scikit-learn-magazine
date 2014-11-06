@@ -29,3 +29,4 @@ while i * 1000 < len(dataset.data) - 2000:
     classifier.partial_fit(X_train, y_train,
                            classes=range(len(dataset.target_names)))
     print(classifier.score(X_test, y_test))
+    i += 1

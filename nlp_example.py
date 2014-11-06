@@ -1,13 +1,13 @@
 import urllib, tarfile  # Standard library imports
 from sklearn import linear_model, pipeline, datasets, feature_extraction
 
-urllib.urlretrieve('http://bit.ly/1juuXIr', 'tmp.tgz') # Download the data
-tarfile.open('tmp.tgz').extractall(path='.')           # Extract it
-data = datasets.load_files('txt_sentoken')             # And load it
+urllib.urlretrieve('http://bit.ly/1juuXIr', 'tmp.tgz') # Download the data,
+tarfile.open('tmp.tgz').extractall(path='.')           # extract it,
+data = datasets.load_files('txt_sentoken')             # and load it.
 
-clf = pipeline.Pipeline([('step1', feature_extraction.text.TfidfVectorizer(min_df=2,
-                                                 sublinear_tf=True, ngram_range=(1, 2))),
-                         ('step2', linear_model.LogisticRegression(C=5000))])
+clf = pipeline.make_pipeline(feature_extraction.text.TfidfVectorizer(min_df=2,
+                                                 sublinear_tf=True, ngram_range=(1, 2)),
+                             linear_model.LogisticRegression(C=5))
 clf.fit(data.data, data.target)
 
 # Demo

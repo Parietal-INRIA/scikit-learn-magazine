@@ -14,17 +14,17 @@ y_test = dataset.target[:1000]
 
 from sklearn.linear_model import PassiveAggressiveClassifier
 # SVM classifier that learns online using SGD.
-classifier = PassiveAggressiveClassifier(C=.01)
+classifier = PassiveAggressiveClassifier(C=.1)
 
-from sklearn.linear_model import SGDClassifier
-# SVM classifier that learns online using SGD.
-classifier = SGDClassifier(learning_rate='invscaling', eta0=1.)
+#from sklearn.linear_model import SGDClassifier
+## SVM classifier that learns online using SGD.
+#classifier = SGDClassifier(learning_rate='invscaling', eta0=1.)
 
 # Main loop : iterate on mini-batchs of 1000 samples
-i = 1000
-while i < len(dataset.data) - 2000:
-    y_train = dataset.target[i:i + 1000]
-    X_train = hasher.fit_transform(dataset.data[i:i + 1000])
+i = 1
+while i * 1000 < len(dataset.data) - 2000:
+    y_train = dataset.target[i * 1000:(i + 1) * 1000]
+    X_train = hasher.fit_transform(dataset.data[i * 1000:(i + 1) * 1000])
     # update estimator with examples in the current mini-batch
     classifier.partial_fit(X_train, y_train,
                            classes=range(len(dataset.target_names)))

@@ -12,21 +12,29 @@
 \usepackage{xspace}
 \usepackage{url}
 \usepackage{magazine-style}
+\usepackage{textcomp}
+
+\makeatletter
+\newcommand*\verbfont{%
+    \normalfont\ttfamily\hyphenchar\font\m@ne\@noligs}
+\makeatother
 
 % Listing settings for Python
 \lstset{language=python,
 	extendedchars=true,
+    columns=fullflexible,
+    upquote=true,
 	xleftmargin = 0pt,
 	%frame=single,
 	%rulecolor=\color{lightgrey},
         aboveskip = 0.5ex,
         belowskip = 0.6ex,
-	basicstyle=\small\sffamily,
+	basicstyle=\verbfont,
 	escapebegin={\color{green}},
         keywordstyle=\bfseries\color{blue!50!black},
 	%identifierstyle=\sffamily\small,
-	commentstyle=\color{green!40!black},
-	stringstyle=\rmfamily\color{red!60!black},
+	commentstyle=\color{green!40!black} \verbfont,
+	stringstyle=\color{red!60!black} \verbfont,
 	showstringspaces=false,
 	tabsize=2,
 	breaklines=true,

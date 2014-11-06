@@ -458,15 +458,10 @@ to walk the fine line between supporting powerful techniques and
 utilizing our limited project cycles on proven technologies. For
 instance, deep neural networks are an emerging tool with a huge
 potential, but are still in flux and hard to use without significant expertise.
-
-Similarly, GPGPU technology is promising, but still poses user-level problems.
-While OpenCL largely hides the incompatibility of GPUs and other compute devices
-at the source code level \cite{stone2010opencl}, it does not guarantee performance portability
-and requires the installation of device-specific drivers.
-PyOpenCL \cite{klockner2012pycuda} may alleviate the former problem and communicates
-with NumPy, making it an obvious starting point for experimentation
-in the direction of GPU-enabled scikit-learn. Theano \cite{bergstra2010theano} has
-shown the feasibility of programming GPU-powered neural nets in Python.
+Similarly, GPGPU technology is promising, but not ready for non-expert use.
+The HPC community and industry have largely achieved source-level compatibility with OpenCL
+\cite{stone2010opencl},
+but still need to solve the problems of performance portability and cross-platform driver support.
 
 Support for mobile platforms such as Android is determined by those platforms'
 support for Python and the standard C/C++ build chain. Indeed, our basic

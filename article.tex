@@ -355,6 +355,15 @@ This scheme yields the fraction of correct answers on three different folds:
 array([0.9026946, 0.8723724, 0.8633634])
 \end{lstlisting}
 
+We see that the expected accuracy is about 88\%.
+Experimenting with different classification models is easy:
+e.g., replacing \texttt{LogisticRegression} with \texttt{svm.LinearSVC}
+gives a linear support vector machine.
+Changing the simple bag-of-words representation to a \textit{bigram}
+(pairs of adjacent words) one is a matter of giving one additional argument
+to the tf--idf vectorizer, which reads \texttt{n\_gram\_range=(2, 2)}.
+(Similarly, the value \texttt{(2,3)} would extract bigrams and trigrams, etc.)
+
 \paragraph{What about big data?}
 %
 \emph{Big data} is a major trend in data analytics: applying machine

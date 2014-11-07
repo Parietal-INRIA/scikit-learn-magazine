@@ -343,10 +343,10 @@ were set manually.
 % To have the float on the bottom, we need this declared on the page
 % before where it is going to be printed
 \lstinputlisting{online_learning_example.py}
-\caption{On-line learning example: the main loop iterates through batches
+\caption{On-line learning: the main loop iterates over batches
 of 1000 documents, vectorizing them on the fly and updating the
-classifier. Running the example shows that the error on the test set
-progressively decreases as data is accumulated.\label{fig:online}}
+classifier. Running the example shows the error on the test set
+progressively decreasing as data is accumulated.\label{fig:online}}
 \end{figure*}
 
 
@@ -421,8 +421,8 @@ is specially designed to mitigate their effect.
 The dimensionality of the output vectors can be set by the user;
 the bigger, the less likely collisions will occur.
 %
-A full example doing online learning on a large corpus of text is given
-in Fig.~\ref{fig:online}.
+A full example doing online learning on the 20 Newsgroups corpus\footnote{\url{http://qwone.com/~jason/20Newsgroups/}}
+is given in Fig.~\ref{fig:online} (a downloader for this corpus comes with scikit-learn).
 
 \section{Nurturing an open source project}
 

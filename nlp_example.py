@@ -11,9 +11,9 @@ clf = pipeline.Pipeline([('step1', feature_extraction.text.TfidfVectorizer(min_d
 clf.fit(data.data, data.target)
 
 # Demo
-clf.predict_proba(["Worst movie I ever saw"])[0, 0]  # negative probability
+clf.predict_proba(["Worst movie I ever saw"])[0, 0]  # Negative probability
 # 0.99929299972040175
-clf.predict_proba(["Godzilla, eat your heart out!"])[0, 1]  # positive probability
+clf.predict_proba(["Godzilla, eat your heart out!"])[0, 1]  # Positive probability
 # 0.64533559029803611
 print clf.predict(["This movie is the worst I ever saw.",
 "Shawshank Redemption, eat your heart out!"])

@@ -340,6 +340,14 @@ on word frequencies) and logistic regression, and finally trains the
 model. Parameters for the feature extractor and the classifier
 were set manually.
 
+\begin{figure*}[b]
+% To have the float on the bottom, we need this declared on the page
+% before where it is going to be printed
+\lstinputlisting{out_of_core_classification.py}
+\caption{On-line learning example.\label{fig:online}}
+\end{figure*}
+
+
 We can test our classifier on two new movie reviews.\footnote{
   The code can be tried interactively by simply copy-pasting it
   into an interactive Python interpreter or IPython \cite{perez2007ipython}.
